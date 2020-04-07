@@ -1,0 +1,4 @@
+flask_session/
+whoosh/
+env/
+.vscode/

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+            {% include "/datatableassets-css.html" %}
+            <style>
+            
+            
+            </style>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Bank Account List - Vendors</h4>
+                            <p class="sub-title">List of All Accounts of Vendors
+                                    </p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card m-b-30">
+                                        <div class="card-body">
+                                            
+                                            <div class="col-sm-6" style="margin-left: 100px;">
+                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Account Name</th>
+                                        <th>Account Number</th>
+                                        <th>Bank</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button id="createEmployee">Create</button>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                            
+                                
+                             <!-- end col -->
+                            
+                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                    </form>
+                        
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    {% include "/datatableassets-js.html" %}
+
+    <script>
+     
+    $(document).ready(function() {
+
+       
+
+        $.get("http://localhost:5000/configure/api/bank-vendor/list", function(data, status){
+            console.log(data);
+
+
+            $('#datatable').DataTable({
+                paging:true,
+                searching:true,
+                scrollY:250,
+                data: data.data,
+
+            });
+                    });
+
+                    
+
+        } );
+        $("#createEmployee").click(function(){
+                    $(location).attr('href', '/configure/employee/create')
+                });
+
+                $('#datatable').on('click', 'tbody tr', function() {
+                    var table = $('#datatable').DataTable();
+                    console.log('API row values : ', table.row(this).data());
+                    var dataitem = table.row(this).data();
+                    //console.log(dataitem[1],"is the item ID");
+                    var url = '/configure/employee/edit/'+dataitem[1]+'/'
+                    console.log(url)
+                    $(location).attr('href', url)
+
+                })
+    
+    </script>
+</html>

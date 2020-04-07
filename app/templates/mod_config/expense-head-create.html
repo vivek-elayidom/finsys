@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+            <style>
+            
+            
+            </style>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Create Expense Head</h4>
+                            <p class="sub-title">Add a new Expense Head for Spend Analytics</p>
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <h6>Expense Head Details</h6>
+                                        <form class="demo-form">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Head Name</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="name" data-parsley-required="true" data-parsley-ui-enabled="true">
+
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Description</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="description" data-parsley-required="true"
+                                                >
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                            <div class="col-12">
+                                
+                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                        <button type="button" class="btn btn-outline-success btn-lg btn-block waves-effect waves-light" id="validateBtn" >Create New Service Item</button>
+                    </form>
+                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirmModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mt-0">Confirm Details of Service ITEM</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-lg-12">
+                                            <div class="card m-b-30">
+                                                <div class="card-body">
+                                        
+                                                    
+                                        
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">ITEM NAME</th>
+                                                                    <td id="c_name">Mark</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Description</th>
+                                                                    <td id="c_description">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                
+                                                                
+                                                               
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-light" id="testbtn">Create</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+
+                        
+     
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+           
+
+            $('#closeContactAdd').on('click', function(event){
+                /*t = "Nil";
+                $('#contact_f_name').hmtl(t);
+                $('#contact_l_name').html(t);
+               $('#contact_email').html(t);*/
+
+                $('#addContact').modal('hide');
+
+            });
+           
+
+            $('#validateBtn').on('click', function(event){
+
+                var name = $('#name').parsley();
+                var description= $('#description').parsley();
+                
+                name.validate();
+                description.validate();
+                
+                
+                
+                t_name = $('#name').val();
+                t_description = $('#description').val();
+                
+                
+
+                if (name.isValid() && description.isValid()){
+                  console.log("All are valid");
+                  $("#c_name").html(t_name);
+                  $("#c_description").html(t_description);
+                  
+                  //$('#detailInfo').html('changed value');
+
+                  $("#confirmModal").modal().show();
+                }else{
+                    $('html, body').animate({scrollTop: 100});
+                    console.log("Error in Front end validation");
+                }
+
+
+
+
+            });
+
+    
+
+            $('#addContactBtn').on('click', function(event){
+
+                $('#addContact').modal().show();
+
+            });
+
+
+            $('#testbtn').on('click', function(event) {
+
+              $.ajax({
+                    data : JSON.stringify( { "name": t_name, "description":t_description} ),
+                    type : 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url : '/configure/api/expense-head/create'
+                })
+                .done(function(data) {
+
+                    if (data.error) {
+                        console.log(data.error)
+                    }
+                    else {
+                        console.log("excellent")
+                        alert("success")
+                        $(location).attr('href', '/configure/main')
+                    }
+
+                });
+
+                event.preventDefault();
+
+            });
+
+        });
+
+    </script>
+
+    
+</html>

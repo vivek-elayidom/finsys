@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+            <style>
+            
+            
+            </style>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Configuration Main View</h4>
+                            <p class="sub-title">Configure everything here!
+                                    </p>
+                            <div class="row">
+                            
+                                <div class="col-xl-4">
+                                    <div class="card m-b-30">
+                                        <img class="card-img-top img-fluid" src="/static/assets/images/config/contact.png" alt="Contact Management">
+                                        <div class="card-body">
+                                            <h4 class="card-title font-16 mt-0" style="text-align: center;">User Accounts</h4>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Customer</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/company/create">Create</a>
+                                                          <a href="/configure/customer/list">Manage</a>
+                                                        </div>
+                                                      </div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Employee</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/employee/create">Create</a>
+                                                          <a href="/configure/user/list">Manage</a>
+                                                        </div>
+                                                      </div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Vendor</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/vendor/create">Create</a>
+                                                          <a href="/configure/vendor/list">Manage</a>
+                                                        </div>
+                                                      </div>                                                
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <div class="dropdown">
+                                                            <a class="dropbtn nav-link">Partner</a>
+                                                            <div class="dropdown-content">
+                                                              <a href="/configure/vendor/create">Create</a>
+                                                              <a href="#">Manage</a>
+                                                            </div>
+                                                          </div>                                                
+                                                        </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Permissions</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/role/create">Create Role</a>
+                                                          <a href="#">Map Users</a>
+                                                        </div>
+                                                      </div>                                                
+                                                </li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="card m-b-30">
+                                        <img class="card-img-top img-fluid" src="/static/assets/images/config/bank.png" alt="Contact Management">
+                                        <div class="card-body">
+                                            <h4 class="card-title font-16 mt-0" style="text-align: center;">Bank Accounts & Credit Cards</h4>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Customer</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/bank-customer/create">Create</a>
+                                                          <a href="/configure/bank-customer/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Vendor</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/bank-vendor/create">Create</a>
+                                                          <a href="/configure/bank-vendor/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Employee</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/bank-employee/create">Create</a>
+                                                          <a href="/configure/bank-employee/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">mDrift</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/bank-mdrift/create">Create</a>
+                                                          <a href="/configure/bank-mdrift/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="card m-b-30">
+                                        <img class="card-img-top img-fluid" src="/static/assets/images/config/expense.png" alt="Contact Management">
+                                        <div class="card-body">
+                                            <h4 class="card-title font-16 mt-0" style="text-align: center;">Expense Management</h4>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Expense Head</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/expense-head/create">Create</a>
+                                                          <a href="/configure/bank-mdrift/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Currency</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Cross Billing</a>
+                                                </li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="card m-b-30">
+                                        <img class="card-img-top img-fluid" src="/static/assets/images/config/products.png" alt="Contact Management">
+                                        <div class="card-body">
+                                            <h4 class="card-title font-16 mt-0" style="text-align: center;">Products & Services</h4>
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Products</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/product/create">Create</a>
+                                                          <a href="/configure/bank-mdrift/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <div class="dropdown">
+                                                        <a class="dropbtn nav-link">Services</a>
+                                                        <div class="dropdown-content">
+                                                          <a href="/configure/service/create">Create</a>
+                                                          <a href="/configure/bank-mdrift/list">Manage</a>
+                                                        </div>
+                                                      </div> 
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Geography</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Sale Controls</a>
+                                                </li>
+
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                             <!-- end col -->
+                            
+                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                    </form>
+                        
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script type="text/javascript">
+
+    </script>
+
+    
+</html>

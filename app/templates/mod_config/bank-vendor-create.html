@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+            <style>
+            
+            
+            </style>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Create Vendor Account</h4>
+                            <p class="sub-title">Add a new company for Financial Transactions
+                                    </p>
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <h6>Bank Details</h6>
+                                        <form class="demo-form">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Account Name</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="acname" data-parsley-required="true" data-parsley-ui-enabled="true">
+
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Account Number</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="acnum" data-parsley-required="true"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">IFSC Code</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="ifsc" data-parsley-required="true"
+                                                >
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">SWIFT Code</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="swift"
+                                                data-parsley-required="true"    >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Bank Name</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="bankname" data-parsley-required="true"
+                                                >
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Branch Name</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="branchname"
+                                                data-parsley-required="true"    >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">IBAN</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="iban">
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <h6>Map VENDOR Account</h6>
+                                            <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Country</label>
+                                            <div class="col-sm-10">
+                                                <select id="customer" name="country" class="form-control"data-parsley-required="true">
+                                                   <option value="1">MES</option>
+                                                   <option value="2">TATA MOTORS</option>
+                                                   <option value="3">VIVEK INC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                        <button type="button" class="btn btn-outline-success btn-lg btn-block waves-effect waves-light" id="validateBtn" >Create New Bank Account</button>
+                    </form>
+                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirmModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mt-0">Confirm Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-lg-12">
+                                            <div class="card m-b-30">
+                                                <div class="card-body">
+                                        
+                                                    
+                                        
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">ACCOUNT NAME</th>
+                                                                    <td id="c_acname">Mark</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">ACCOUNT NUMBER</th>
+                                                                    <td id="c_acnum">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">BANK</th>
+                                                                    <td id="c_bank">www.mdrift.com</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">BRANCH</th>
+                                                                    <td id="c_branch">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">IFSC</th>
+                                                                    <td id="c_ifsc">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">SWIFT</th>
+                                                                    <td id="c_swift">345th , 17th Cross, Dollars Colony,</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">IBAN</th>
+                                                                    <td id="c_IBAN">Bengaluru</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">CUSTOMER</th>
+                                                                    <td id="c_customer">Kerala</td>
+                                                                    
+                                                                </tr>
+                                                               
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-light" id="testbtn">Create</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+
+                        <div class="modal fade" id="addContact" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="contact_f_name" data-parsley-required="true">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Email</label>
+                                    <input type="text" class="form-control" id="contact_email" data-parsley-type="email">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Notes if Any</label>
+                                    <textarea class="form-control" id="contact_notes"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeContactAdd">Close</button>
+                                <button type="button" class="btn btn-primary" id="addContactBtnF">Add Contact</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+     
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var t_name; 
+            var t_clientID;
+            var t_site;
+            var t_vat; 
+            var t_city;
+            var t_state; 
+            var t_country; 
+            var t_address1;
+            var t_address2;
+
+            $('#addContactBtnF').on('click', function(event){
+
+                console.log("Add Contact is hit");
+
+                var contact_f_name = $('#contact_f_name').parsley();
+                var contact_l_name = $('#contact_l_name').parsley();
+                var contact_email = $('#contact_email').parsley();
+
+                contact_f_name.validate();
+                contact_l_name.validate();
+                contact_email.validate();
+
+                t_contact_f_name = $('#contact_f_name').val();
+                t_contact_l_name = $('#contact_l_name').val();
+                t_contact_email = $('#contact_email').val();
+
+                if(contact_f_name.isValid() && contact_l_name.isValid() && contact_email.isValid()){
+
+                    console.log("Everything is valid");
+                    $.ajax({
+                        data : JSON.stringify( { "name": "vivek", "email": "vivek@gmail" } ),
+                        type : 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url : 'api/v1.0/addcontact'
+                    })
+                    .done(function(data) {
+
+                        if (data.error) {
+                            console.log(data.error)
+                        }
+                        else {
+                            console.log("excellent");
+                            alert("success");
+                            //$('input[name=checkListItem').val('');
+                            $('#contact_f_name').val('');
+                            $('#contact_l_name').val('');
+                            $('#contact_email').val('');
+                            $('#contact_notes').val('');
+
+                            $('#addContact').modal('hide');
+                        }
+                        
+
+                    });
+                }
+
+
+            });
+
+            $('#closeContactAdd').on('click', function(event){
+                /*t = "Nil";
+                $('#contact_f_name').hmtl(t);
+                $('#contact_l_name').html(t);
+               $('#contact_email').html(t);*/
+
+                $('#addContact').modal('hide');
+
+            });
+           
+
+            $('#validateBtn').on('click', function(event){
+
+                var acname = $('#acname').parsley();
+                var acnum = $('#acnum').parsley();
+                var bankname = $('#bankname').parsley();
+                var branchname = $('#branchname').parsley();
+                var ifsc = $('#ifsc').parsley();
+                var swift = $('#swift').parsley();
+                
+                acname.validate();
+                acnum.validate();
+                bankname.validate();
+                branchname.validate();
+                ifsc.validate();
+                swift.validate();
+                
+                
+                t_acname = $('#acname').val();
+                t_acnum = $('#acnum').val();
+                t_bankname = $('#bankname').val();
+                t_branchname = $('#branchname').val();
+                t_ifsc = $('#ifsc').val();
+                t_swift = $('#swift').val();
+                t_customer = $('#customer').val();
+                
+
+                if (acnum.isValid() && acnum.isValid() && bankname.isValid() && bankname.isValid() && branchname.isValid() && ifsc.isValid() && swift.isValid()){
+                  console.log("All are valid");
+                  $("#c_acname").html(t_acname);
+                  $("#c_acnum").html(t_acnum);
+                  $("#c_ifsc").html(t_ifsc);
+                  //$("#c_iban").html(t_iban);
+                  $("#c_swift").html(t_swift);
+                  $("#c_bank").html(t_bankname);
+                  $("#c_branch").html(t_branchname);
+                  $("#c_customer").html(t_customer);
+                  //$('#detailInfo').html('changed value');
+
+                  $("#confirmModal").modal().show();
+                }else{
+                    $('html, body').animate({scrollTop: 100});
+                    console.log("Error in Front end validation");
+                }
+
+
+
+
+            });
+
+            /*
+            $('#some-input').parsley().on('field:success', function() {
+             // In here, `this` is the parlsey instance of #some-input
+             var instance = $('#first').parsley();
+             console.log(instance.isValid()); // maxlength is 42, so field is valid
+             $('#first').attr('data-parsley-maxlength', 4);
+             console.log(instance.isValid()); // No longer valid, as maxlength is 4
+             // You can access and override options in javascript too:
+             instance.options.maxlength++;
+             console.log(instance.isValid()); // Back to being valid, as maxlength is 5
+             // Alternatively, the options can be specified as:
+             var otherInstance = $('#second').parsley({
+               maxlength: 10
+             });
+             console.log(otherInstance.options); // Shows that maxlength will be 10 for this field
+
+            });
+
+            */
+
+            $('#addContactBtn').on('click', function(event){
+
+                $('#addContact').modal().show();
+
+            });
+
+
+            $('#testbtn').on('click', function(event) {
+
+                // /                                        ac_name, ac_number,ifsc, swift,iban,bank_name,branch_name,owner_type,ownerID:
+
+                $.ajax({
+                    data : JSON.stringify( { "ac_name": t_acname, "ac_number":t_acnum,"ifsc":t_ifsc,"swift":t_swift,"iban":"ABCDF","bank_name":t_bankname,"branch_name":t_branchname,"owner_type":2,"ownerID":t_customer} ),
+                    type : 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url : '/configure/api/bank-account/create'
+                })
+                .done(function(data) {
+
+                    if (data.error) {
+                        console.log(data.error)
+                    }
+                    else {
+                        console.log("excellent")
+                        alert("success")
+                        $(location).attr('href', '/configure/main')
+                    }
+
+                });
+
+                event.preventDefault();
+
+            });
+
+        });
+
+    </script>
+
+    
+</html>

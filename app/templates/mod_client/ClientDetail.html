@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    		{% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here #30419B-->
+            <!-- ============================================================== -->
+            <style>
+            #customers {
+              font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+              margin-left: 10%;
+              margin-right: 10%;
+              margin-top: 15px;
+            }
+
+            .loader {
+              border: 16px solid #f3f3f3; /* Light grey */
+              border-top: 16px solid #3498db; /* Blue */
+              border-radius: 50%;
+              width: 120px;
+              height: 120px;
+              margin-left: 40%;
+              margin-right: 10%;
+              animation: spin 2s linear infinite;
+            }
+
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }	
+            
+            .center {
+              margin: auto;
+              padding-top: 15px;
+              text-align: center;
+              
+            }
+            .center2 {
+              
+              margin-left: 10%;
+              margin-right: 10%;
+              margin-top: 10px;
+
+              
+              text-align: center;
+              
+              
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #30419B;
+              color: white;
+            }
+            </style>
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box" style="margin:auto; padding-bottom: 0px;">
+                            <h4 class="mt-0 header-title">VIEW CLIENT DETAIL</h4>
+                            <p class="sub-title">View Details of INDEPENDENT RECORD</p>
+                         </div>
+                        <!-- end page-title -->
+                        <!--  -->
+                        <div class="row center2" style="margin: auto;">
+                            <div class="col-lg-8">
+                                <button type="button" class="btn btn-warning" id="copyBtn" >Edit</button>
+                                <button type="button" class="btn btn-warning" id="searchBtn" >Share Details</button>
+                                <button type="button" class="btn btn-warning" id="searchBtn" >Copy Details</button>
+                                <button type="button" class="btn btn-warning" id="searchBtn" >PDF</button>
+                                <button type="button" class="btn btn-warning" id="searchBtn" >Excel</button>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row center2" id="tableRow">
+                        	<div class="card m-b-30" >
+                                    <div class="card-body">
+                                        <div class="table-responsive" style="text-align: left; width: 550px">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Name</th>
+                                                        <td>{{client.org_name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">City</th>
+                                                        <td>{{client.city}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Country</th>
+                                                        <td>{{client.country}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Address</th>
+                                                        <td>{{client.address1 + " " + client.address2}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row center" id="paginationHolder">
+                        	<nav aria-label="..." class="center">
+                        	    <ul class="pagination" id="paginator" >
+                        	        
+                        	        <!--
+									<li class="page-item disabled">
+									    <a class="page-link" href="#" tabindex="-1">Previous</a>
+									</li>
+                        	        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        	        <li class="page-item active">
+                        	            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        	        </li>
+                        	        <li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+									    <a class="page-link" href="#">Next</a>
+									</li>
+
+                        	    -->
+                        	        
+                        	    </ul>
+                        	</nav>
+                        </div>
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+                
+
+            </div>
+
+
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script type="text/javascript">
+    </script>
+
+    
+</html>

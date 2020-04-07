@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+            <style>
+            
+            
+            </style>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Create Role</h4>
+                            <p class="sub-title">Configure everything here!
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card m-b-30">
+                                                <div class="card-body">
+                                                    <h6>Select User</h6>
+                                                    <form class="demo-form">
+            
+                                                    <div class="form-group row">
+                                                        <label for="example-text-input" class="col-sm-2 col-form-label">Users</label>
+                                                        <div class="col-sm-2">
+                                                            <input class="form-control" type="text" value="" id="name" data-parsley-required="true" data-parsley-ui-enabled="true">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" class="btn btn-outline-secondary waves-effect">Create Role</button>
+                                                        </div>                                    
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                            <div class="row">
+                                            <div class="col-12" style="display: inline;">
+                                                <div class="card m-b-30">
+                                                    <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <h6>Modules</h6>
+                                                    <div style="height:200px;overflow:auto;" >
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item"><a  href="#">Dashboard</a></li>
+                                                        <li class="list-group-item"><a  href="#">Expenses</a></li>
+                                                        <li class="list-group-item"><a  href="#">Quotes</a></li>
+                                                        <li class="list-group-item"><a  href="#">Invoice</a></li>
+                                                        <li class="list-group-item"><a  href="#">Approvals</a></li>
+                                                        <li class="list-group-item"><a  href="#">Salary</a> </li>
+                                                        <li class="list-group-item"><a  href="#">Ledger</a> </li>
+                                                        <li class="list-group-item"><a  href="#">Transactions</a> </li>
+                                                        <li class="list-group-item"><a  href="#">Projects</a> </li>
+                                                        <li class="list-group-item"><a  href="#">Reports</a></li>
+                                                        <li class="list-group-item"><a  href="#">Configure</a></li>
+                                                    </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div style="overflow: auto; margin-top: 30px; margin-left: 50px; ">
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item">
+                                                                <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheck2" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                                                <label class="custom-control-label" for="customCheck2">View DashBoard</label>
+                                                                </div>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck2" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                                                    <label class="custom-control-label" for="customCheck2">Configure Dashboard</label>
+                                                                </div>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck2" data-parsley-multiple="groups" data-parsley-mincheck="2">
+                                                                    <label class="custom-control-label" for="customCheck2">Edit</label>
+                                                                </div>
+                                                            </li>
+    
+                                                        </ul>
+                                                    </div>
+
+                                                    
+
+
+                                                </div>
+                                                </div>
+                                                </div>
+
+                                            </div>
+                                            </div>
+                                        </div>
+
+                              
+
+                                
+                             <!-- end col -->
+                            
+                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                    </form>
+                        
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    
+
+    
+</html>

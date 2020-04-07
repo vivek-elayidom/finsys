@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <script src="/static/assets/js/waves.min.js"></script>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+    		{% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here #30419B-->
+            <!-- ============================================================== -->
+            <style>
+            #customers {
+              font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 80%;
+              margin-left: 10%;
+              margin-right: 10%;
+              margin-top: 15px;
+            }
+
+            .loader {
+              border: 16px solid #f3f3f3; /* Light grey */
+              border-top: 16px solid #3498db; /* Blue */
+              border-radius: 50%;
+              width: 120px;
+              height: 120px;
+              margin-left: 40%;
+              margin-right: 10%;
+              animation: spin 2s linear infinite;
+            }
+
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }	
+            
+            .center {
+              margin: auto;
+              width: auto;
+              padding-top: 15px;
+              text-align: center;
+              
+            }
+            .center2 {
+              
+              margin-left: 10%;
+              margin-right: 10%;
+
+              
+              text-align: center;
+              
+              
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #30419B;
+              color: white;
+            }
+            </style>
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box" style="margin:auto; padding-bottom: 0px;">
+                            <h4 class="mt-0 header-title">VIEW CLIENTS</h4>
+                            <p class="sub-title">View and Query All the Clients in Database</p>
+                         </div>
+                        <!-- end page-title -->
+                        <!--  -->
+                        <div class="row center2">
+                        	<div class="col-lg-3" style="position: block;">
+                        		<label style="display: inline-block;">Search</label>
+                        		<input class="form-control" type="search" value="" id="searchtab">
+                        		
+                        	</div>
+                        	<div class="col-lg-3">
+                        		<label>From</label>
+                        		<input class="form-control" type="date" value="" id="begin-date">
+                        	</div>
+                        	<div class="col-lg-3">
+                        		<label>To</label>
+                        		<input class="form-control" type="date" value="" id="end-date">
+                        	</div>
+                        	<div class="col-lg-3 center">
+                        		<button type="button" class="btn btn-warning" id="searchBtn" >Search</button>
+                        		<button type="button" class="btn btn-warning" id="searchBtn" >Clear</button>
+                        	</div>
+                        	
+
+                        </div>
+
+                        <div class="row" id="tableRow">
+                        	<div id="loadHolder" class="center">
+                        	</div>
+                        	<table id="customers">
+                        	  <tr class="click-row">
+                        	    <th>Company</th>
+                        	    <th>Country</th>
+                        	    <th>City</th>
+                        	  </tr>
+                        	  
+                        	  {%for i in range(0, len)%}
+
+                        	  	<tr class="click-row">
+                        	  	  <td><a href = "{{ url_for('client.contact_Detail', id=contactList[i].id) }}">{{contactList[i].name}}</td>
+                        	  	  <td>{{contactList[i].organisationName}}</td>
+                        	  	  <td>{{contactList[i].position}}</td>
+                        	  	</tr> 
+                        	     
+                        	  {%endfor%} 
+                        	</table>
+                        </div>
+                        <div class="row center" id="paginationHolder">
+                        	<nav aria-label="..." class="center">
+                        	    <ul class="pagination" id="paginator" >
+                        	        
+                        	        <!--
+									<li class="page-item disabled">
+									    <a class="page-link" href="#" tabindex="-1">Previous</a>
+									</li>
+                        	        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        	        <li class="page-item active">
+                        	            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        	        </li>
+                        	        <li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item">
+									    <a class="page-link" href="#">Next</a>
+									</li>
+
+                        	    -->
+                        	        
+                        	    </ul>
+                        	</nav>
+                        </div>
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+                
+
+            </div>
+
+
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+        	/*
+			<div class="row" id="loader">
+                        	<div class="loader"></div>
+             </div>
+
+			<li class="page-item disabled">
+			    <a class="page-link" href="#" tabindex="-1">Previous</a>
+			</li>
+			<li class="page-item">
+
+			<a class="page-link" href="#">Next</a>
+									</li>
+        	*/
+        	var pnum = {{pnum}};
+        	var tnum = {{totalpages}};
+        	console.log(pnum,tnum);
+        	var pagesDisplayed = 0;
+
+        	if(tnum >10){
+
+        		pagesDisplayed = 10;
+        	}else{
+
+        		pagesDisplayed = tnum;
+        	}
+
+        	$('#paginator').append('<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>');
+
+        	/*
+			<li class="page-item active">
+                        	            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        	        </li>
+        	*/
+
+        	for (i = 0; i < tnum; i++) {
+        	  if(i+1 != pnum){
+        	  	$('#paginator').append('<li class="page-item"><a class="page-link" href="/client/browse/'+(i+1)+'">'+(i+1)+'</a></li>');
+        	  }else{
+        	  	$('#paginator').append('<li class="page-item active"><a class="page-link" href="/client/browse/'+(i+1)+'">'+(i+1)+'<span class="sr-only">(current)</span></a></li>');
+        	  }
+        	  
+
+        	}
+
+        	$('#paginator').append('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+
+        	$("#customers").on('click-row.bs.table', function (e, row, $element) {
+        	    window.location = $element.data('href');
+        	});
+
+        	$('#searchBtn').on('click', function(event){
+
+        		$("#loadHolder").append('<div class="loader"></div>');
+        		$("#customers").hide();
+        		$("#paginationHolder").hide();
+
+        		var query = $('#searchtab').val();
+        		var begin_date = $('#begin-date').val();
+        		var end_date = $('#end-date').val();
+
+        		if (query != null && begin_date != null && end_date != null){
+
+
+        		
+
+        		$.ajax({
+        		    data : JSON.stringify( { "query": query, "start": begin_date,"end":end_date } ),
+        		    type : 'POST',
+        		    dataType: 'json',
+        		    contentType: 'application/json',
+        		    url : '/client/api/v1.0/setSearch'
+        		})
+        		.done(function(data) {
+
+        			$(location).attr('href', '/client/browse/1/');
+        			console.log("successful post");
+
+        		    if (data.error) {
+        		        console.log(data.error)
+        		    }
+        		    else {
+        		        console.log("excellent")
+        		        $(location).attr('href', '/client/browse/1/')
+
+        		    }
+
+        		});
+        	}
+        	else{
+
+        		alert("Give the query properly, Boss!")
+        	}
+
+        		//$("#customers").hide();
+
+
+        	});
+
+        });
+        
+    </script>
+
+    
+</html>

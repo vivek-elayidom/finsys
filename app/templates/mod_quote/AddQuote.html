@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <link rel="stylesheet" href="/static/assets/css/jquery.auto-complete.css">
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+        <style type="text/css">
+          .fixedTitleBar {
+             
+              position:fixed;
+              top:0;
+              width:100%;
+              z-index:100;
+          }
+          .vericalNavMenu{
+             
+             border-bottom: 0px;
+             border-color: #0099ff;
+          }
+          .vericalNavMenu:hover{
+            background-color: #f4f4f4;
+            border-bottom: 3px;
+            border-color: #0099ff;
+          }
+          .vericalNavMenu-active {
+            background-color: #f4f4f4;
+            border-bottom: 3px;
+            border-color: #0099ff;
+            color: #0570b7;
+          }
+          .h6{
+
+            color: #0570b7;
+          }
+         
+         
+        </style>
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box" class="fixedTitleBar">
+                            <h4 class="mt-0 header-title">Create Quote</h4>
+                            <p class="sub-title" style="margin-bottom: 0px;">Create a Quote Against Project
+                            </p>
+                        </div>
+                            <div class="row">
+                            <div class="col-3" >
+                                <div class="card m-b-10">
+                                    <div class="card-body" style="height: 450px;" >
+
+                                      <ul class="nav flex-column" id="leftMenuContainer">
+                                            <li class="nav-item">
+                                                <a class="nav-link vericalNavMenu-active" id="menu1" href="#">Project Details</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link vericalNavMenu" href="#" id="menu2">Billing Components</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link vericalNavMenu" id="menu3" href="#">Milestones</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link vericalNavMenu" id="menu4" href="#">Terms & Conditions</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link vericalNavMenu" id="menu5" href="#">Internal Notes</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7" >
+                                <div class="card m-b-10">
+                                    <div class="card-body"style="height: 450px;">
+                                      
+                                      <form id="form1">
+                                        <p class="sub-title" style="margin-bottom: 5px;">Basic Details of Project</p>
+                                        <label>Project Name</label>
+                                        <input type="text" class="form-control">
+                                        <label style="margin-top: 10px;">Project Details</label>
+                                        <textarea rows="3" cols="50" class="form-control">
+                                        </textarea>
+                                        <label style="margin-top: 10px;">Client</label>
+                                        <input type="text" class="form-control">
+                                        <label style="margin-top: 10px;">Contact Person</label>
+                                        <input type="text" class="form-control">
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="1-nextBtn" style="width: 80%; margin-left: 10%; margin-top: 15px;">Next</button>
+                                      </form>
+                                      <form style="display: none;" id="form2">
+                                        <p class="sub-title" style="margin-bottom: 5px;">Billing Details</p>
+                                        <ul class="nav justify-content-center">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="addServiceBtn">Add Service Items</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="addProductBtn">Add Product</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="setCurrencyBtn">Currency</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="resetBtn">Reset</a>
+                                            </li>
+                                        </ul>
+                                        <div style="text-align: center;color: #0570b7">
+                                          <h5>2500 USD</h5>
+                                        </div>
+                                        <div class="table-responsive" style="font-size: 85%;">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Unit</th>
+                                                        <th>Rate</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Markssdsdsdsdsd</td>
+                                                        <td>sdsd</td>
+                                                        <td>@sd</td>
+                                                        <td>@sd</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="2-prevBtn" style="width: 35%; margin-left: 10%; margin-top: 15px;">Previous</button>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="2-nextBtn" style="width: 35%; margin-right: 10%; margin-top: 15px;">Next</button>
+                                      </form>
+                                      <form style="display: none;" id="form3">
+                                        <p class="sub-title" style="margin-bottom: 5px;">Milestone Details</p>
+                                        <ul class="nav justify-content-center">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="setTimeBtn">Set Time</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="addMilestone">
+                                                  Add Milestone
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#" id="resetMilestoneBtn">Reset</a>
+                                            </li>
+                                        </ul>
+                                        <div style="text-align: center;color: #0570b7">
+                                          <h5>7 Months - 28 Weeks</h5>
+                                        </div>
+                                        <div class="table-responsive" style="font-size: 85%;">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Unit</th>
+                                                        <th>Rate</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Markssdsdsdsdsd</td>
+                                                        <td>sdsd</td>
+                                                        <td>@sd</td>
+                                                        <td>@sd</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="2-prevBtn" style="width: 35%; margin-left: 10%; margin-top: 15px;">Previous</button>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="2-nextBtn" style="width: 35%; margin-right: 10%; margin-top: 15px;">Next</button>
+                                      </form>
+                                      <form style="display: none;" id="form4">
+                                        <p class="sub-title" style="margin-bottom: 5px;">Terms & Conditions</p>
+                                        <textarea rows="3" cols="50" class="form-control">
+                                        </textarea>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="4-prevBtn" style="width: 35%; margin-left: 10%; margin-top: 15px;">Previous</button>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="4-nextBtn" style="width: 35%; margin-right: 10%; margin-top: 15px;">Next</button>
+                                      </form>
+                                      <form style="display: none;" id="form5">
+                                        <p class="sub-title" style="margin-bottom: 5px;">Notes(Internal Review)</p>
+                                        <textarea rows="3" cols="50" class="form-control">
+                                        </textarea>
+                                        <button type="button" class="btn btn-outline-success waves-effect waves-light" id="5-prevBtn" style="width: 80%; margin-left: 10%; margin-top: 15px;">Previous</button>
+                                      </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="card m-b-10">
+                                    <div class="card-body" style="display:none;height: 400px;">
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- end col -->
+                          </div>
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- AddService Area 1 starts here-->
+
+            <div class="modal fade" id="addService" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Services</label>
+                        <select class="form-control">
+                          <option>Select Service</option>
+                          <option>Front End</option>
+                          <option>Design</option>
+                          <option>Management Consulting</option>
+                          <option>Enterprise Search</option>
+                          <option>Data Analytics</option>
+                          <option>Project Management</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Rate Per Hour</label>
+                        <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Number of Hours</label>
+                        <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeServiceModal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addContactBtnF">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- AddService Area 1 ends here -->
+
+            <!-- AddProduct Modal starts here -->
+
+              <div class="modal fade" id="addProduct" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Services</label>
+                        <select class="form-control">
+                          <option>Select Product</option>
+                          <option>NOVA - Logistics</option>
+                          <option>Transafe/jSecure</option>
+                          <option>Domitos</option>
+                          <option>Facility Management System</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">License Cost</label>
+                        <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeProductModal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addContactBtnF">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- AddProduct Modal ends here -->
+
+            <!-- setCurrency Modal starts here -->
+
+              <div class="modal fade" id="setCurrencyModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Currency</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Currencies</label>
+                        <select class="form-control">
+                          <option>Select Currency</option>
+                          <option>USD</option>
+                          <option>SGD</option>
+                          <option>INR</option>
+                          <option>GBP</option>
+                          <option>EUR</option>
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeCurrencyModal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addContactBtnF">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           <!-- AddProduct Modal starts here -->
+
+              <div class="modal fade" id="setTimeModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Select Period</label>
+                        <select class="form-control">
+                          <option>Select Product</option>
+                          <option>NOVA - Logistics</option>
+                          <option>Transafe/jSecure</option>
+                          <option>Domitos</option>
+                          <option>Facility Management System</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Number of Periods</label>
+                        <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeProductModal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addContactBtnF">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- SetCurrency Modal ends here -->
+              <div class="modal fade" id="addMilestoneModal" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Currency</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Currencies</label>
+                        <select class="form-control">
+                          <option>Select Currency</option>
+                          <option>USD</option>
+                          <option>SGD</option>
+                          <option>INR</option>
+                          <option>GBP</option>
+                          <option>EUR</option>
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeMilestoneModal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addContactBtnF">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script src="/static/assets/js/jquery.auto-complete.min.js"></script>
+    <script type="text/javascript">
+
+      menu1 = document.getElementById("menu1");
+      menu2 = document.getElementById("menu2");
+      menu3 = document.getElementById("menu3");
+      menu4 = document.getElementById("menu4");
+      menu5 = document.getElementById("menu5");
+
+      form1 = document.getElementById("form1");
+      form2 = document.getElementById("form2");
+      form3 = document.getElementById("form3");
+      form4 = document.getElementById("form4");
+      form5 = document.getElementById("form5");
+
+      function triggerPage1(){
+
+        menu1.className = "nav-link vericalNavMenu-active";
+        menu2.className = " nav-link vericalNavMenu";
+        menu3.className = " nav-link vericalNavMenu";
+        menu4.className = " nav-link vericalNavMenu";
+        menu5.className = " nav-link vericalNavMenu";
+
+        form1.style.display = "block";
+        form2.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "none";
+        form5.style.display = "none";
+
+      }
+        function triggerPage2(){
+
+        menu1.className = "nav-link vericalNavMenu";
+        menu2.className = "nav-link vericalNavMenu-active";
+        menu3.className = "nav-link vericalNavMenu";
+        menu4.className = "nav-link vericalNavMenu";
+        menu5.className = "nav-link vericalNavMenu";
+
+        form1.style.display = "none";
+        form2.style.display = "block";
+        form3.style.display = "none";
+        form4.style.display = "none";
+        form5.style.display = "none";
+      }
+
+        function triggerPage3(){
+
+        menu1.className = "nav-link vericalNavMenu";
+        menu2.className = "nav-link vericalNavMenu";
+        menu3.className = "nav-link vericalNavMenu-active";
+        menu4.className = "nav-link vericalNavMenu";
+        menu5.className = "nav-link vericalNavMenu";
+
+        form1.style.display = "none";
+        form2.style.display = "none";
+        form3.style.display = "block";
+        form4.style.display = "none";
+        form5.style.display = "none";
+      }
+
+        function triggerPage4(){
+
+        menu1.className = "nav-link vericalNavMenu";
+        menu2.className = "nav-link vericalNavMenu";
+        menu3.className = "nav-link vericalNavMenu";
+        menu4.className = "nav-link vericalNavMenu-active";
+        menu5.className = "nav-link vericalNavMenu";
+
+        form1.style.display = "none";
+        form2.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "block";
+        form5.style.display = "none";
+      }
+
+        function triggerPage5(){
+
+        menu1.className = "nav-link vericalNavMenu";
+        menu2.className = "nav-link vericalNavMenu";
+        menu3.className = "nav-link vericalNavMenu";
+        menu4.className = "nav-link vericalNavMenu";
+        menu5.className = "nav-link vericalNavMenu-active";
+
+        form1.style.display = "none";
+        form2.style.display = "none";
+        form3.style.display = "none";
+        form4.style.display = "none";
+        form5.style.display = "block";
+      }
+
+
+      $('#1-nextBtn').click(function(){
+        triggerPage2();
+      });
+      $('#2-prevBtn').click(function(){
+        triggerPage1();
+      });
+      $('#2-nextBtn').click(function(){
+        triggerPage3();
+      });
+      $('#3-prevBtn').click(function(){
+        triggerPage2();
+      });
+      $('#3-nextBtn').click(function(){
+        triggerPage4();
+      });
+      $('#4-prevBtn').click(function(){
+        triggerPage3();
+      });
+      $('#4-nextBtn').click(function(){
+        triggerPage5();
+      });
+      $('#5-prevBtn').click(function(){
+        triggerPage4();
+      });
+      $('#menu1').click(function(){
+        triggerPage1();
+      });
+      $('#menu2').click(function(){
+        triggerPage2();
+      });
+      $('#menu3').click(function(){
+        triggerPage3();
+      });
+      $('#menu4').click(function(){
+        triggerPage4();
+      });
+      $('#menu5').click(function(){
+        triggerPage5();
+      });
+
+      $('#addServiceBtn').click(function(){
+
+        $('#addService').modal();
+
+      });
+
+      $('#addProductBtn').click(function(){
+
+        $('#addProduct').modal();
+
+      });
+
+      $('#setCurrencyBtn').click(function(){
+
+        $('#setCurrencyModal').modal();
+
+      });
+
+      $('#closeCurrencyModal').click(function(){
+
+       $('#setCurrencyModal').modal('toggle');
+
+      });
+      $('#closeProductModal').click(function(){
+
+        $('#addProduct').modal('toggle');
+
+      });
+      $('#closeServiceModal').click(function(){
+
+        $('#addService').modal('toggle');
+
+      });
+
+      $('#setTimeBtn').click(function(){
+
+        $('#setTimeModal').modal();
+
+      });
+
+      $('#closeMilestoneModal').click(function(){
+
+        $('#addMilestoneModal').modal('toggle');
+
+      });
+
+      $('#addMilestone').click(function(){
+
+        $('#addMilestoneModal').modal();
+
+      });
+
+
+
+
+    </script>
+
+    
+</html>

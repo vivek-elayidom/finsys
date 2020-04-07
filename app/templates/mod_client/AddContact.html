@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    {% include "/assets.html" %}
+
+    {% block body %}
+        <link rel="stylesheet" href="/static/assets/css/jquery.auto-complete.css">
+        <script src="/static/assets/js/waves.min.js"></script>
+        <!-- Begin page -->
+        <div id="wrapper">
+        <style type="text/css">
+          
+
+          .autocomplete {
+            /*the container must be positioned relative:*/
+            position: relative;
+            display: inline-block;
+          }
+          .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+          }
+          .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+          }
+          .autocomplete-items div:hover {
+            /*when hovering an item:*/
+            background-color: #e9e9e9;
+          }
+          .autocomplete-active {
+            /*when navigating through the items using the arrow keys:*/
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+          }
+        </style>
+
+            <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+            <!-- Top Bar End -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            {% include "/sidebar.html" %}
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <h4 class="mt-0 header-title">Add Contact Details</h4>
+                            <p class="sub-title">Add a new contact And Map Against Organisation
+                                    </p>
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <h6>Basic Details</h6>
+                                        <form class="demo-form">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="name" data-parsley-required="true" data-parsley-ui-enabled="true">
+
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">ContactID</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value=" {{ id }}" id="contactID" data-parsley-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Position</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="position" data-parsley-required="true">
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">LinkedIn URL</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="linkedInURL"
+                                                data-parsley-required="true" data-parsley-type="url"    >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Phone Number</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="phone">
+                                            </div>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Email ID</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="text" value="" id="email"
+                                                data-parsley-required="true" data-parsley-type="email"    >
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                         <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
+                         <div class="row">
+                          <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                      <h6>Map Organisation</h6>
+                                      <!--
+
+                                          <div class="autocomplete" style="width:300px;">
+                                              <input id="myInput" type="text" name="myCountry" placeholder="Country">
+                                            </div>
+
+                                      -->
+                                      <div class="col-lg-12 autocomplete">
+                                          <input class="form-control" type="text" value="" id="myInput" name="myCountry" placeholder="Search Companies" onkeydown="keyPressFunction()" data-parsley-required="true">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                         </div>
+                        <button type="button" class="btn btn-outline-success btn-lg btn-block waves-effect waves-light" id="validateBtn" >Create New Contact</button>
+                    </form>
+                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirmModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mt-0">Confirm Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-lg-12">
+                                            <div class="card m-b-30">
+                                                <div class="card-body">
+                                        
+                                                    
+                                        
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
+                                                            
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Name</th>
+                                                                    <td id="c_name">Mark</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Email</th>
+                                                                    <td id="c_email">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">LinkedIn URL</th>
+                                                                    <td id="c_linkedINURL">www.mdrift.com</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Position</th>
+                                                                    <td id="c_position">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Organisation</th>
+                                                                    <td id="c_company">Jacob</td>
+                                                                    
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-light" id="testbtn">Create Client</button>
+                                                    <button type="button" class="btn btn-primary btn-lg btn-block waves-effect waves-light">Create Client & Repeat</button>
+                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+
+                        <div class="modal fade" id="addContact" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">First Name</label>
+                                    <input type="text" class="form-control" id="contact_f_name" data-parsley-required="true">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="contact_l_name" data-parsley-required="true">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Email</label>
+                                    <input type="text" class="form-control" id="contact_email" data-parsley-type="email">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Notes if Any</label>
+                                    <textarea class="form-control" id="contact_notes"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeContactAdd">Close</button>
+                                <button type="button" class="btn btn-primary" id="addContactBtnF">Add Contact</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+     
+ <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+                <!-- content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        <!-- END wrapper -->
+
+
+        
+    {% endblock %}
+    {% include "/jsassets.html" %}
+    <script src="/static/assets/js/jquery.auto-complete.min.js"></script>
+    <script>
+
+      var selectedID = 0;
+
+    function getID(str,arr){
+
+      console.log("Array is ", arr,"and String is", str);
+      for (var i = 0; i < arr.length; i++) {
+        if(arr[i].name == str){
+          console.log("ID is ", arr[i].id);
+          selectedID = arr[i].id;
+        }
+      }
+
+    };
+
+    function automain(inp,ar){
+
+      var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda"];
+
+
+      
+      arr = JSON.parse(ar);
+      //console.log("Type of normal Arrays is", typeof countries);
+      //console.log("Type of API Arrays is", typeof arr);
+
+      var currentFocus;
+      console.log(arr, "array transferred");
+      /*execute a function when someone writes in the text field:*/
+      inp.addEventListener("input", function(e) {
+          var a, b, i, val = this.value;
+          /*close any already open lists of autocompleted values*/
+          closeAllLists();
+          if (!val) { 
+            console.log("No value detected");
+            return false;}
+          currentFocus = -1;
+          /*create a DIV element that will contain the items (values):*/
+          a = document.createElement("DIV");
+          a.setAttribute("id", this.id + "autocomplete-list");
+          a.setAttribute("class", "autocomplete-items");
+          /*append the DIV element as a child of the autocomplete container:*/
+          this.parentNode.appendChild(a);
+          /*for each item in the array...*/
+          console.log("array lenght is", arr.length, "array is", arr);
+          for (i = 0; i < arr.length; i++) {
+            /*check if the item starts with the same letters as the text field value:*/
+            if (arr[i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              /*create a DIV element for each matching element:*/
+              console.log("There is match");
+              b = document.createElement("DIV");
+              /*make the matching letters bold:*/
+              b.innerHTML = "<strong>" + arr[i].name.substr(0, val.length) + "</strong>";
+              b.innerHTML += arr[i].name.substr(val.length);
+              /*insert a input field that will hold the current array item's value:*/
+              b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
+              /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+                  /*insert the value for the autocomplete text field:*/
+                  inp.value = this.getElementsByTagName("input")[0].value;
+                  console.log(inp.value,"is selected");
+                  getID(inp.value, arr);
+
+                  //selectedID = arr[i].id;
+                  //console.log("ID with name", arr[i].name, "and ID", arr[i].id ,"is selected");
+                  /*close the list of autocompleted values,
+                  (or any other open lists of autocompleted values:*/
+                  closeAllLists();
+              });
+              a.appendChild(b);
+            }
+          }
+      });
+      /*execute a function presses a key on the keyboard:*/
+      inp.addEventListener("keydown", function(e) {
+          var x = document.getElementById(this.id + "autocomplete-list");
+          if (x) x = x.getElementsByTagName("div");
+          if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+          } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+          } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+              /*and simulate a click on the "active" item:*/
+              if (x) x[currentFocus].click();
+            }
+          }
+      });
+      function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+      function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+          x[i].classList.remove("autocomplete-active");
+        }
+      }
+      function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+          if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+      /*execute a function when someone clicks in the document:*/
+      document.addEventListener("click", function (e) {
+          closeAllLists(e.target);
+      });
+
+
+    }
+
+    function autocomplete(inp) {
+      /*the autocomplete function takes two arguments,
+      the text field element and an array of possible autocompleted values:*/
+
+      console.log("Autocomplete Function is called");
+      searchterm = document.getElementById("myInput").value;
+      $.ajax({
+           async: false,
+           type: 'GET',
+           url: "/client/api/v1.0/search?q="+searchterm,
+           success: function(data) {
+              if(data.length>0){
+                console.log("calling automain",data);
+                automain(inp,data);
+              }else{
+                console.log("Not calling Automain");
+              }
+              
+           }
+      });
+      
+    }
+
+    //autocomplete(document.getElementById("myInput"));
+
+    function keyPressFunction(){
+
+      
+      
+      console.log("Key is pressed");
+      autocomplete(document.getElementById("myInput"));
+      /*searchterm = document.getElementById("myInput").value;
+      $.ajax({
+           async: false,
+           type: 'GET',
+           url: "/client/api/v1.0/search?q="+searchterm,
+           success: function(data) {
+              console.log(data,"is ajax result array");
+              autocomplete(document.getElementById("myInput"),data);
+
+           }
+      });*/
+    }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var t_name; 
+            var t_contactID;
+            var t_linkedInURL;
+            var t_position;
+            var t_company; 
+            var t_email; 
+
+            $('#testbtn').on('click', function(event){
+
+                console.log("Add Contact is hit");
+
+                var p_name = $('#name').parsley();
+                var p_email = $('#email').parsley();
+                var p_linkedInURL = $('#linkedInURL').parsley();
+                var p_position = $('#position').parsley();
+                var p_contactID = $('#contactID').parsley();
+                var p_company = $('#myInput').parsley();
+ 
+                p_name.validate();
+                p_email.validate();
+                p_linkedInURL.validate();
+                p_position.validate();
+                p_contactID.validate();
+                p_company.validate();
+
+                t_name = $('#name').val();
+                t_email = $('#email').val();
+                t_linkedInURL = $('#linkedInURL').val();
+                t_contactID = $('#contactID').val();
+                t_position = $('#position').val();
+                t_company = $('#myInput').val();
+
+                if(p_name.isValid() && p_email.isValid() && p_linkedInURL.isValid() && p_position.isValid()  && p_contactID.isValid() && p_company.isValid() ){
+
+                    console.log("Everything is valid");
+                    $.ajax({
+                        data : JSON.stringify( { "name": t_name, "email": t_email, "linkedInURL":t_linkedInURL, "contactID": t_contactID, "position":t_position, "company":t_company , "companyID": selectedID} ),
+                        type : 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url : '/client/api/v1.0/addcontact'
+                    })
+                    .done(function(data) {
+
+                        if (data.error) {
+                            console.log(data.error)
+                        }
+                        else {
+                            console.log("excellent");
+                            alert("success");
+                            //$('input[name=checkListItem').val('');
+                            $(location).attr('href', '/client/contact/create')
+                        }
+                        
+
+                    });
+                }
+
+
+            });
+
+            $('#closeContactAdd').on('click', function(event){
+                /*t = "Nil";
+                $('#contact_f_name').hmtl(t);
+                $('#contact_l_name').html(t);
+               $('#contact_email').html(t);*/
+
+                $('#addContact').modal('hide');
+
+            });
+           
+
+            $('#validateBtn').on('click', function(event){
+
+                var p_name = $('#name').parsley();
+                var p_email = $('#email').parsley();
+                var p_linkedInURL = $('#linkedInURL').parsley();
+                var p_position = $('#position').parsley();
+                var p_contactID = $('#contactID').parsley();
+                var p_company = $('#myInput').parsley();
+                
+                p_name.validate();
+                p_email.validate();
+                p_linkedInURL.validate();
+                p_position.validate();
+                p_contactID.validate();
+                p_company.validate();
+
+                t_name = $('#name').val();
+                t_email = $('#email').val();
+                t_linkedInURL = $('#linkedInURL').val();
+                t_contactID = $('#contactID').val();
+                t_position = $('#postion').val();
+                t_company = $('#myInput').val();
+
+                if(p_name.isValid() && p_email.isValid() && p_linkedInURL.isValid() && p_position.isValid()  && p_contactID.isValid() && p_company.isValid() ){
+                  console.log("All are valid");
+                  $("#c_name").html(t_name);
+                  $("#c_linkedINURL").html(t_linkedInURL);
+                  $("#c_email").html(t_email);
+                  $("#c_phone").html(t_position);
+                  $("#c_company").html(t_company);
+                  //$('#detailInfo').html('changed value');*/
+
+                  $("#confirmModal").modal().show();
+                }else{
+                    $('html, body').animate({scrollTop: 100});
+                    console.log("Error in Front end validation");
+                }
+
+            });
+
+
+
+        });
+    </script>
+
+    
+</html>
