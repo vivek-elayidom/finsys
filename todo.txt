@@ -1,5 +1,13 @@
-- Create perfect interface for List View of Expenses
-- Sidebar (Right) for edit of one single record
-- Upload of file via API to Amazon S3
-- Download of file
+Expense Module
+- Search from Top Bar
+- Default Date as Today
+- Data update on Edit
+- Validation on New
+- Validation on Edit
+- Transaction Logs
+- Server Side response as flash/Toast
+- Datatable Column Customization
 
+Done
+- New and Edit Switch States in Pure JS
+- New Forms and Edit Forms needs to be border color change

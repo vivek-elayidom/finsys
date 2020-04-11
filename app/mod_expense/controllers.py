@@ -14,6 +14,7 @@ import time
 from datetime import datetime
 import os
 from app.mod_expense.models import Expense,Tag
+from app.mod_config.models import Vendor
 
 mod_expense = Blueprint('expense', __name__, url_prefix='/expense')
 
@@ -115,4 +116,20 @@ def api_fileUpload():
             resp = jsonify(success=True)
             return resp
 
-
+@mod_expense.route('/api/getByID/<int:id>',methods=['GET'])
+def api_expenseByID(id):
+    #id = request.json['id']
+    expense = Expense.query.get(id)
+    print(expense)
+    title = expense.title
+    meta = expense.meta
+    amount = expense.amount
+    headID = expense.headID
+    vendorID = expense.entityID
+    currency = expense.currency
+    t_date = expense.transaction_date
+    status = expense.status
+    vendor = Vendor.query.get(vendorID)
+    vendorName = vendor.name
+    resp = jsonify(success=True,title=title,remarks=meta, amount=amount,category=headID,vendorID=vendorID,vendorName=vendorName, currency=currency,t_date=t_date,status=status)
+    return resp
