@@ -75,16 +75,29 @@ class Expense(Base,SearchableMixin):
     # User Name
     title    = db.Column(db.String(128),  nullable=False)# Identification Data: email & password
     meta    = db.Column(db.String(250),  nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     headID = db.Column(db.Integer,nullable=False)
+    toEntityType = db.Column(db.String(128), nullable=False)
+    entityID = db.Column(db.Integer, nullable=False)
+    currency = db.Column(db.String(128), nullable=False)
+    transaction_date = db.Column(db.DateTime,nullable=False)
+    requested_date = db.Column(db.DateTime,nullable=False)
+    status = db.Column(db.String(128), nullable=False)
+
 
     # New instance instantiation procedure
-    def __init__(self, title, meta,amount,headID):
+    def __init__(self, title, meta,amount,headID,toEntityType,entityID,currency,t_date,r_date,status):
 
         self.title     = title
         self.meta = meta
         self.amount = amount
         self.headID = headID
+        self.toEntityType = toEntityType
+        self.entityID = entityID
+        self.currency = currency
+        self.transaction_date = t_date
+        self.requested_date = r_date
+        self.status = status
 
 class Tag(Base,SearchableMixin):
     __tablename__ = 'tag'

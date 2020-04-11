@@ -2,11 +2,12 @@
 from flask import Flask, render_template,session
 
 from flask_session import Session
-
+import os
 
 from flask import app as app
 
 import tempfile
+from werkzeug.utils import secure_filename
 
 from elasticsearch import Elasticsearch
 
@@ -19,15 +20,16 @@ from sqlalchemy_searchable import make_searchable
 
 # Define the WSGI application object
 app = Flask(__name__)
-
-
-
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 # Configurations
 app.config.from_object('config')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
+
 
 
 
@@ -38,7 +40,12 @@ db = SQLAlchemy(app)
 
 
 app.secret_key = 'super-secret-key'
-Session(app)
+
+app.config['SESSION_SQLALCHEMY_TABLE'] = 'sessions'
+app.config['SESSION_SQLALCHEMY'] = db
+
+session = Session(app)
+session.app.session_interface.db.create_all()
 
 
 

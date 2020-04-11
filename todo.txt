@@ -1,28 +1,5 @@
-Create Projects - Today
-Browse Projects - Today
-Project Costs - Today
-
-Expense Reports
-
-Create Expense Report
-Expense Heads
-Approvals
-Realizations
-
-Salary
-- Add Employee
-- Browse Employee
-- Salary Slips
-- Process Salary
-- Settings
-
-Project Fields
-Name,Client, Duration, Project Members
-Short Description
-Timeline
-Final Quote
-Milestones
-Project Manager
-
-
+- Create perfect interface for List View of Expenses
+- Sidebar (Right) for edit of one single record
+- Upload of file via API to Amazon S3
+- Download of file
 

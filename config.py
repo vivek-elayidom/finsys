@@ -16,10 +16,13 @@ DATABASE_CONNECT_OPTIONS = {}
 # incoming requests using one and performing background
 # operations using the other.
 THREADS_PER_PAGE = 2
-SESSION_TYPE = 'filesystem'
-SESSION_FILE_DIR = BASE_DIR
-WHOOSH_BASE = "whoosh"
-WHOOSH_BASE = "postgresql://postgres:Om@shantiom123@localhost:5432/kmrl2"
+SESSION_TYPE = 'sqlalchemy'
+#SESSION_FILE_DIR = BASE_DIR
+
+SESSION_SQLALCHEMY_TABLE = 'sessions'
+SESSION_SQLALCHEMY = ''
+#WHOOSH_BASE = "whoosh"
+#WHOOSH_BASE = "postgresql://postgres:Om@shantiom123@localhost:5432/kmrl2"
 
 # Enable protection agains *Cross-site Request Forgery (CSRF)*
 CSRF_ENABLED     = True
@@ -30,3 +33,4 @@ CSRF_SESSION_KEY = "secret"
 ELASTICSEARCH_URL="http://localhost:9200"
 # Secret key for signing cookies
 SECRET_KEY = "secret"
+

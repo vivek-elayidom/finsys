@@ -17,6 +17,8 @@
             <!-- Left Sidebar End -->
             <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
             {% include "/datatableassets-css.html" %}
+            
+
             <style>
             
             
@@ -29,39 +31,115 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="page-title-box">
-                            <h4 class="mt-0 header-title">Bank Account List - Vendors</h4>
-                            <p class="sub-title">List of All Accounts of Vendors
-                                    </p>
+                            <h4 class="mt-0 header-title">Bills till Date</h4>
+                            <p class="sub-title">List of All Accounts of Vendors</p>
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            
-                                    <div class="col-sm-8" style="margin-left: 100px;">
-                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                    <thead>
-                                    <tr>
-                                        <th>Account Name</th>
-                                        <th>Account Number</th>
-                                        <th>Bank</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                                </div>
-                                <div class="col-sm-12">
-                                    <button id="createEmployee">Create</button>
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                            
-                                
-                             <!-- end col -->
-                            
-                        </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+                                <div class="card" style="width: 98%; margin-bottom: 5px;">
+                                    <div class = "card-body" style="display: inline-block;height: 55px; vertical-align: middle; padding-top: 10px; " >
+                                            <label>From</label>
+                                            <input style="margin-left: 10px; width: 120px; border: 0.5px solid #ccc; border-radius: 2px;box-sizing: border-box;" type="date" value="2011-08-19" id="example-date-input"  >
+                                            <label style="margin-left: 10px;">To</label>
+                                            <input style="margin-left: 10px; width: 120px; border: 0.5px solid #ccc; border-radius: 2px;box-sizing: border-box;" type="date" value="2011-08-19" id="example-date-input" >
+                                            <label style="margin-left: 10px;">Head</label>
+                                            <input  style="margin-left: 10px; width: 150px; border: 0.5px solid #ccc; border-radius: 2px;box-sizing: border-box;" type="search" value="" id="example-search-input">
+                                            <label style="margin-left: 10px;">Vendor</label>
+                                            <input  style="margin-left: 10px; width: 150px; border: 0.5px solid #ccc; border-radius: 2px;box-sizing: border-box;" type="search" value="" id="example-search-input">
+                                            <button type="button" class="btn btn-outline-info waves-effect waves-light" style="margin-left: 10px;">Search</button>
+                                    </div>
+                                  </div>
+                                  <div class="card" style="width: 50%;margin-top: 10px;">
+                                    <div class="card-body">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid" aria-describedby="datatable_info">
+                                            <thead>
+                                            <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 135px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 208px;" aria-label="Position: activate to sort column ascending">ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 97px;" aria-label="Office: activate to sort column ascending">Amount</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 42px;" aria-label="Age: activate to sort column ascending">Currency</th>
+                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 91px;" aria-label="Start date: activate to sort column ascending">Start date</th>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                  </div>
+                                  <div class="card" style="width: 45%; margin-left: 30px;margin-top: 10px;">
+                                    <div class="card-body">
+                                        <div style="display: block;" >
 
-                    </form>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-light">
+                                                    <input type="radio" name="options" id="option1" checked=""> New
+                                                </label>
+                                                <label class="btn btn-light active">
+                                                    <input type="radio" name="options" id="option2"> Edit
+                                                </label>
+                                                
+                                                
+                                            </div>
+                                            <!--
+
+                                                    title, meta,amount,headID,toEntityType,entityID,currency,t_date,r_date,status
+
+                                                -->
+                                            
+
+                                        </div>
+                                        <div style="display: block; margin-top: 10px;">
+                                            <h4 style="display: inline;">350</h4><h5 style="display: inline;">&nbsp&nbspUSD</h5>
+                                        </div>
+                                        <div style="display: block; margin-top: 10px;">
+                                        <div class="row">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                  <label style="display: block;" for="name">Title</label>
+                                                  <input style="display: block;" id="name" type="text" value="" name="name">
+                                                </div>
+                                              
+                                                <div style="float:left; margin-left: 10px;">
+                                                  <label style="display: block;" for="email">Category</label>
+                                                  <input style="display: block;" id="email" type="text" value="" name="email">
+                                                </div>
+                                                <br style="clear:both;"/>
+                                            </section>
+                                        </div>
+                                        <div class="row" style="margin-top: 10px;">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                  <label style="display: block;" for="name">Vendor</label>
+                                                  <input style="display: block;" id="name" type="text" value="" name="name">
+                                                </div>
+                                              
+                                                <div style="float:left; margin-left: 10px;">
+                                                  <label style="display: block;" for="email">Transaction Date</label>
+                                                  <input style="display: block;" id="email" type="date" value="" name="email">
+                                                </div>
+                                                <br style="clear:both;" />
+                                            </section>
+                                        </div>
+                                        <div class="row" style="margin-top: 10px;">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                  <label style="display: block;" for="name">Remarks</label>
+                                                  <textarea style="width: 300px;height: 80px;resize: none;"></textarea>
+                                                </div>
+                                                <br style="clear:both;" />
+                                            </section>
+                                        </div>                                             
+                                        </div>
+                                        <div style="display: block; margin-top: 10px;">
+                                            <form action="/expense/api/upload" class="dropzone">
+                                                <div class="fallback">
+                                                  <input name="file" type="file" multiple />
+                                                </div>
+                                              </form>
+                                        </div>
+
+                                    </div>
+                                  </div>
+                            
+                            </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+
                         
  <!-- end row -->
                         </div>
@@ -95,7 +173,7 @@
 
        
 
-        $.get("http://localhost:5000/configure/api/bank-employee/list", function(data, status){
+        $.get("/expense/api/getAllExpenses", function(data, status){
             console.log(data);
 
 
