@@ -27,6 +27,17 @@
         tr {
             cursor: pointer;
         }
+        .thinBorderControl {
+                /*border-radius: 3px;
+                border-color: #ccc;
+                */
+                border:0px;
+                border-bottom: 1px solid #ccc;
+                margin-top: 2px;
+                cursor: pointer;
+
+            }
+
             .thinBorder {
                 /*border-radius: 3px;
                 border-color: #ccc;
@@ -68,13 +79,13 @@
                                 <div class="card" style="width: 98%; margin-bottom: 5px;">
                                     <div class = "card-body" style="display: inline-block;height: 55px; vertical-align: middle; padding-top: 10px; " >
                                             <label>From</label>
-                                            <input class="thinBorder" type="date" value="2011-08-19" id="example-date-input"  >
+                                            <input class="thinBorderControl" type="date" value="2011-08-19" id="from_date"  >
                                             <label style="margin-left: 10px;">To</label>
-                                            <input class="thinBorder"  type="date" value="2011-08-19" id="example-date-input" >
+                                            <input class="thinBorderControl"  type="date" value="2011-08-19" id="to_date" >
                                             <label style="margin-left: 10px;">Head</label>
-                                            <input class="thinBorder" type="search" value="" id="example-search-input">
+                                            <input class="thinBorderControl" type="search" value="" id="example-search-input">
                                             <label style="margin-left: 10px;">Vendor</label>
-                                            <input class="thinBorder" type="search" value="" id="example-search-input">
+                                            <input class="thinBorderControl" type="search" value="" id="example-search-input">
                                             <button type="button" class="btn btn-outline-info waves-effect waves-light" style="margin-left: 10px;">Search</button>
                                     </div>
                                   </div>
@@ -102,10 +113,16 @@
                                                 <label class="btn btn-light active" id="newButton" onclick="changeState('new')">
                                                     <input type="radio" name="options" > New
                                                 </label>
+                                                <label class="btn btn-light "id="viewButton" onclick="changeState('view')">
+                                                    <input type="radio" name="options" > View
+                                                </label>
                                                 <label class="btn btn-light "id="editButton" onclick="changeState('edit')">
                                                     <input type="radio" name="options" > Edit
                                                 </label>
+                                                
+                                                
                                             </div>
+                                            <button id="saveBtn" class="btn btn-light" style="float: right; margin-left: 50px; margin-right: 5px;">Save</button>
                                             <!--
                                     title, meta,amount,headID,toEntityType,entityID,currency,t_date,r_date,status
 
@@ -272,7 +289,7 @@
 
     <script>
 
-        var state = 0;
+        var global_state = 0;
         var recordID = 0; 
         (function() {
         
@@ -286,10 +303,11 @@
             document.getElementById("edit_title").value = data['title'];
             document.getElementById("edit_category").value = data['category'];
             document.getElementById("edit_vendor").value = data['vendorName'];
-            document.getElementById("edit_date").value = data['date'];
+            document.getElementById("edit_date").value = data['t_date'];
             document.getElementById("edit_remarks").value = data['remarks'];
             document.getElementById("edit_amount").value = data['amount'];
             document.getElementById('edit_currency').value = data['currency'];
+            document.getElementById('viewButton').click();
         
         }
 
@@ -333,11 +351,36 @@
             if(state=="new"){
                 newRecord.style.display = "block";
                 editRecord.style.display = "none";
+                $(".thinBorder").attr("readonly", false); 
+                $(".thinTextBox").attr("readonly", false);
+                $('#saveBtn').show();
+                $('.thinBorder').change(function(){
+                    console.log("Hi");
+                });
+                global_state = 0;
+                $("#saveBtn").removeClass("btn btn-success").addClass("btn btn-light");
+                
+
+            }
+            if(state=="view"){
+                newRecord.style.display = "none";
+                editRecord.style.display = "block";
+                $(".thinBorder").prop("readonly", true);
+                $(".thinTextBox").prop("readonly", true);
+                document.getElementById('new_date').value = getDateinFormat('today');
+                $('#saveBtn').hide();
+                global_state = 1;
+                
 
             }
             if(state=="edit"){
                 newRecord.style.display = "none";
                 editRecord.style.display = "block";
+                $(".thinBorder").attr("readonly", false); 
+                $(".thinTextBox").attr("readonly", false);
+                $('#saveBtn').show();
+                global_state = 0;
+                $("#saveBtn").removeClass("btn btn-success").addClass("btn btn-light");  
 
             }
 
@@ -345,15 +388,48 @@
 
 
     </script>
-
+    
     <script>
      
     $(document).ready(function() {
 
-
+        /*let current_datetime = new Date();
+        var month = current_datetime.getMonth() + 1;
+        var monthString = "";
+        if(month<10){
+            monthString = '0' + month.toString();
+        }else{
+            monthString = month.toString();
+        }
+        var dayString = '0';
+        var day = current_datetime.getDate();
+        console.log(day,"day");
+        if(day<10){
+            dayString = '0' + day.toString();
+        }else{
+            dayString = day.toString();
+            console.log(dayString,"daystring");
+        }
+        var todateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + dayString;
+        var fromDateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + '01';
+        let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
+        console.log(formatted_date);
+        */
+       document.getElementById('to_date').value = getDateinFormat('today');
+       document.getElementById('from_date').value = getDateinFormat('firstday');
        var newButton = $('#newButton');
        var editButton = $('#editButton');
-       editButton.click();
+       var viewButton = $('#viewButton');
+       viewButton.click();
+        
+        $(".thinBorder").on("input", function(){
+        // Print entered value in a div box
+        $("#saveBtn").removeClass("btn btn-light").addClass("btn btn-success");
+        console.log("SaveBtn changed");
+        });
+        
+       
+
 
 
         $.get("/expense/api/getAllExpenses", function(data, status){

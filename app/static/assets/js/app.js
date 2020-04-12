@@ -129,3 +129,40 @@ function ($) {
     "use strict";
     $.MainApp.init();
 }(window.jQuery);
+
+
+function getDateinFormat(option){
+
+    var current_datetime = new Date();
+    var month = current_datetime.getMonth() + 1;
+    var monthString = "";
+    if(month<10){
+        monthString = '0' + month.toString();
+    }else{
+        monthString = month.toString();
+    }
+    var dayString = '0';
+    var day = current_datetime.getDate();
+    console.log(day,"day");
+    if(day<10){
+        dayString = '0' + day.toString();
+    }else{
+        dayString = day.toString();
+        console.log(dayString,"daystring");
+    }
+    var todateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + dayString;
+    var fromDateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + '01';
+    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
+    console.log(formatted_date);
+
+    if(option == 'today'){
+
+        return todateString;
+    }else{
+
+        return fromDateString;
+    }
+
+    
+}
+
