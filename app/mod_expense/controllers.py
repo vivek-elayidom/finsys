@@ -86,6 +86,25 @@ def api_getAllExpenses():
     resp = jsonify(data=d)
     return resp
 
+@mod_expense.route('/api/newAllExpenses', methods=['GET'])
+def api_newAllExpenses():
+    print("Got hit for allExpenses  API")
+    records = db.session.query(Expense).all()
+    d = []
+    for item in records:
+        k = {}
+        k['title'] = item.title
+        k['id'] = item.id
+        k['amount'] = item.amount
+        k['display_amount'] = str(item.amount) + ' ' + item.currency
+        k['currency'] = item.currency
+        k['date'] = str(item.transaction_date.date())
+        d.append(k)
+    resp = jsonify(data=d)
+    return resp
+
+
+
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 

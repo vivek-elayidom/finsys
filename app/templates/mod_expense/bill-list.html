@@ -1,174 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    {% include "/assets.html" %}
+{% include "/assets.html" %} {% block body %}
+<script src="/static/assets/js/waves.min.js"></script>
+<!-- Begin page -->
+<div id="wrapper">
 
-    {% block body %}
-        <script src="/static/assets/js/waves.min.js"></script>
-        <!-- Begin page -->
-        <div id="wrapper">
-
-            <!-- Top Bar Start -->
+    <!-- Top Bar Start -->
     {% include "/topnav.html" %}
-            <!-- Top Bar End -->
+    <!-- Top Bar End -->
 
-            <!-- ========== Left Sidebar Start ========== -->
-            {% include "/sidebar.html" %}
-            <!-- Left Sidebar End -->
-            <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
-            <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-            {% include "/datatableassets-css.html" %}
-            
+    <!-- ========== Left Sidebar Start ========== -->
+    {% include "/sidebar.html" %}
+    <!-- Left Sidebar End -->
+    <link href="/static/assets/css/tooltip.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"> {% include "/datatableassets-css.html" %}
 
-            <style>
-            /* Ensure that the demo table scrolls */
-                
- 
+
+    <style>
+        /* Ensure that the demo table scrolls */
+        
         tr {
             cursor: pointer;
+            font-size: 12px;
+            height: 14px;
         }
+        
         .thinBorderControl {
-                /*border-radius: 3px;
+            /*border-radius: 3px;
                 border-color: #ccc;
                 */
-                border:0px;
-                border-bottom: 1px solid #ccc;
-                margin-top: 2px;
-                cursor: pointer;
-
-            }
-
-            .thinBorder {
-                /*border-radius: 3px;
+            border: 0px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        .thinBorder {
+            /*border-radius: 3px;
                 border-color: #ccc;
                 */
-                border:0px;
-                border-bottom: 1px solid #ccc;
-                margin-top: 2px;
-                cursor: pointer;
+            border: 0px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        .thinBorderForEdit {
+            /*border-radius: 3px;
+                border-color: #ccc;
+                */
+            border: 0px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        .thinTextBox {
+            border: 1px #ccc solid;
+            cursor: pointer;
+        }
+        
+        .thinTextBoxForEdit {
+            border: 1px #ccc solid;
+            cursor: pointer;
+        }
+        
+        .validator {
+            margin-top: 0px;
+            margin-bottom: 1px;
+            font-size: 12px;
+        }
+        
+        .formTitle {
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+    </style>
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page" style="overflow-y: auto;">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="page-title-box">
+                    <h4 class="mt-0 header-title">Bills till Date</h4>
+                    <p class="sub-title">List of All Accounts of Vendors</p>
+                    <div class="row">
+                        <div class="card" style="width: 98%; margin-bottom: 5px;">
+                            <div class="card-body" style="display: inline-block;height: 55px; vertical-align: middle; padding-top: 10px; ">
+                                <label>From</label>
+                                <input class="thinBorderControl" type="date" value="2011-08-19" id="from_date">
+                                <label style="margin-left: 10px;">To</label>
+                                <input class="thinBorderControl" type="date" value="2011-08-19" id="to_date">
+                                <label style="margin-left: 10px;">Head</label>
+                                <input class="thinBorderControl" type="search" value="" id="example-search-input">
+                                <label style="margin-left: 10px;">Vendor</label>
+                                <input class="thinBorderControl" type="search" value="" id="example-search-input">
+                                <button type="button" class="btn btn-outline-info waves-effect waves-light" style="margin-left: 10px;">Search</button>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 50%;margin-top: 10px;">
+                            <div class="card-body">
+                                <table id="datatable" class="display" style="border-collapse: collapse; border-spacing: 0px; width: 100%; height: 400px;" role="grid" aria-describedby="datatable_info">
+                                    <thead>
 
-            }
-            .thinTextBox{
-                border: 1px #ccc solid;
-                cursor: pointer;
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 45%; margin-left: 30px;margin-top: 10px;">
+                            <div class="card-body">
+                                <div style="display: block;" id="controlBar">
 
-            }
-            .validator{
-                margin-top: 0px;
-                margin-bottom: 1px;
-                font-size: 10px;
-            }
-            .formTitle{
-                margin-bottom: 0px;
-                padding-bottom: 0px;
-
-            }
-            
-            </style>
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page" style="overflow-y: auto;">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="page-title-box">
-                            <h4 class="mt-0 header-title">Bills till Date</h4>
-                            <p class="sub-title">List of All Accounts of Vendors</p>
-                            <div class="row">
-                                <div class="card" style="width: 98%; margin-bottom: 5px;">
-                                    <div class = "card-body" style="display: inline-block;height: 55px; vertical-align: middle; padding-top: 10px; " >
-                                            <label>From</label>
-                                            <input class="thinBorderControl" type="date" value="2011-08-19" id="from_date"  >
-                                            <label style="margin-left: 10px;">To</label>
-                                            <input class="thinBorderControl"  type="date" value="2011-08-19" id="to_date" >
-                                            <label style="margin-left: 10px;">Head</label>
-                                            <input class="thinBorderControl" type="search" value="" id="example-search-input">
-                                            <label style="margin-left: 10px;">Vendor</label>
-                                            <input class="thinBorderControl" type="search" value="" id="example-search-input">
-                                            <button type="button" class="btn btn-outline-info waves-effect waves-light" style="margin-left: 10px;">Search</button>
-                                    </div>
-                                  </div>
-                                  <div class="card" style="width: 50%;margin-top: 10px;">
-                                    <div class="card-body">
-                                        <table id="datatable" class="display" style="border-collapse: collapse; border-spacing: 0px; width: 100%; height: 400px;" role="grid" aria-describedby="datatable_info">
-                                            <thead>
-                                            <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 135px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 208px;" aria-label="Position: activate to sort column ascending">ID</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 97px;" aria-label="Office: activate to sort column ascending">Amount</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 42px;" aria-label="Age: activate to sort column ascending">Currency</th>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 91px;" aria-label="Start date: activate to sort column ascending">Start date</th>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-                                  <div class="card" style="width: 45%; margin-left: 30px;margin-top: 10px;">
-                                    <div class="card-body">
-                                        <div style="display: block;" id="controlBar" >
-
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-light active" id="newButton" onclick="changeState('new')">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light active" id="newButton" onclick="changeState('new')">
                                                     <input type="radio" name="options" > New
                                                 </label>
-                                                <label class="btn btn-light "id="viewButton" onclick="changeState('view')">
+                                        <label class="btn btn-light " id="viewButton" onclick="changeState('view')">
                                                     <input type="radio" name="options" > View
                                                 </label>
-                                                <label class="btn btn-light "id="editButton" onclick="changeState('edit')">
+                                        <label class="btn btn-light " id="editButton" onclick="changeState('edit')">
                                                     <input type="radio" name="options" > Edit
-                                                </label>
-                                                
-                                                
-                                            </div>
-                                            <button id="saveBtn" class="btn btn-light" style="float: right; margin-left: 50px; margin-right: 5px;">Save</button>
-                                            <!--
+                                        </label>
+
+
+                                    </div>
+                                    <button id="saveBtn" class="btn btn-light" style="float: right; margin-left: 50px; margin-right: 5px;">Save</button>
+                                    <!--
                                     title, meta,amount,headID,toEntityType,entityID,currency,t_date,r_date,status
 
                                                 -->
-                                            
 
-                                        </div>
-                                        <div id="newRecord" style="display: block;">
-                                        <div style="display: block; margin-top: 15px;">
-                                            <input class="thinBorder" style="display: inline-flex; width: 50px;font-size: 15px;" id="new_amount" type="text" value="" name="name"><input class="thinBorder" style="display: inline-flex; width: 50px; margin-left: 8px;font-size: 15px;" id="new_currency" type="text" value="" name="name">
-                                        </div>
-                                        <div style="display: block; margin-top: 10px;">
+
+                                </div>
+                                <div id="newRecord" style="display: block;">
+                                    <div class="row">
+                                        <section>
+                                            <div style="display: block; margin-top: 15px;">
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Amount</label>
+                                                    <p class="validator" id="v_new_amount">Trans. Amount</p>
+                                                    <input class="thinBorder" style="display: inline-flex; width: 75px;font-size: 15px;" id="new_amount" type="text" value="" name="name">
+                                                </div>
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Currency</label>
+                                                    <p class="validator" id="v_new_currency">Select Currency</p>
+                                                    <input class="thinBorder" style="display: inline-flex; width: 70px; margin-left: 8px;font-size: 15px;" id="new_currency" type="text" value="" name="name" list="currency_list">
+                                                    <datalist id="currency_list">
+                                            <option value="USD">USD</option>
+                                            <option value="SGD">SGD</option>
+                                            <option value="INR">INR</option>
+                                        </datalist>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div style="display: block; margin-top: 10px;">
                                         <div class="row">
                                             <section>
                                                 <div style="float:left;margin-left:20px;">
-                                                  <label class="formTitle" style="display: block;" for="name">Title</label>
-                                                  <p class="validator">Short Title for Expense</p>
-                                                  <input class="thinBorder" style="display: block;" id="new_title" type="text" value="" name="name">
-                                                    
+                                                    <label class="formTitle" style="display: block;" for="name">Title</label>
+                                                    <p class="validator" id="v_new_title">Short Title for Expense</p>
+                                                    <input class="thinBorder" style="display: block;" id="new_title" type="text" value="" name="name">
                                                 </div>
-                                              
+
                                                 <div style="float:left; margin-left: 10px;">
-                                                  <label class="formTitle" style="display: block;" for="email">Category</label>
-                                                  <p class="validator">Pick an Expense Head</p>
-                                                  <input class="thinBorder" style="display: block;" id="new_category" type="text" value="" list="category">
-                                                  <datalist id="category">
-                                                    <option value="ABCD"></option>
-                                                    <option value="EFGH"></option>
-                                                    <option value="IJKL"></option>
+                                                    <label class="formTitle" style="display: block;" for="email">Category</label>
+                                                    <p class="validator" id="v_new_category">Pick an Expense Head</p>
+                                                    <input class="thinBorder" style="display: block;" id="new_category" type="text" value="" list="category">
+                                                    <datalist id="category">
+                                                    <option value="ABCD">ABCD</option>
+                                                    <option value="EFGH">EFG</option>
+                                                    <option value="IJKL">IJK</option>
                                                 </datalist>
                                                 </div>
-                                                <br style="clear:both;"/>
+                                                <br style="clear:both;" />
                                             </section>
                                         </div>
                                         <div class="row" style="margin-top: 10px;">
                                             <section>
                                                 <div style="float:left;margin-left:20px;">
-                                                  <label class="formTitle" style="display: block;" for="name">Vendor</label>
-                                                  <p class="validator">Select a Vendor</p>
-                                                  <input class="thinBorder" style="display: block;" id="new_vendor" type="text" value="" name="name">
+                                                    <label class="formTitle" style="display: block;" for="name">Vendor</label>
+                                                    <p class="validator" id="v_new_vendor">Select a Vendor</p>
+                                                    <input class="thinBorder" style="display: block;" id="new_vendor" type="text" list="vendors" value="" name="name">
+                                                    <datalist id="vendors">
+                                                        <option value="Tata"></option>
+                                                        <option value="Microsoft"></option>
+                                                        <option value="MES"></option>
+                                                    </datalist>
                                                 </div>
-                                               
+
                                                 <div style="float:left; margin-left: 10px;">
-                                                  <label class="formTitle" style="display: block;" for="email">Transaction Date</label>
-                                                  <p class="validator">Give a Transaction Date</p>
-                                                  <input class="thinBorder" style="display: block;" id="new_date" type="date" value="" name="email">
+                                                    <label class="formTitle" style="display: block;" for="email">Transaction Date</label>
+                                                    <p class="validator" id="v_new_date">Give a Transaction Date</p>
+                                                    <input class="thinBorder" style="display: block;" id="new_date" type="date" value="" name="email">
                                                 </div>
                                                 <br style="clear:both;" />
                                             </section>
@@ -176,130 +211,146 @@
                                         <div class="row" style="margin-top: 10px;">
                                             <section>
                                                 <div style="float:left;margin-left:20px;">
-                                                  <label class="formTitle" style="display: block;" for="name">Remarks</label>
-                                                  <p class="validator">A Short Remark in 100 Characters Max</p>
-                                                  <textarea id="new_remarks" class="thinTextBox" style="width: 300px;height: 80px;resize: none;"></textarea>
+                                                    <label class="formTitle" style="display: block;" for="name">Remarks</label>
+                                                    <p class="validator" id="v_new_remarks">A Short Remark in 100 Characters Max</p>
+                                                    <textarea id="new_remarks" class="thinTextBox" style="width: 300px;height: 80px;resize: none;"></textarea>
                                                 </div>
                                                 <br style="clear:both;" />
                                             </section>
-                                        </div>                                             
                                         </div>
-                                        <div style="display: block; margin-top: 10px;">
-                                            <form action="/expense/api/upload" class="dropzone">
-                                                <div class="fallback">
-                                                  <input id="new_file" name="file" class="thinTextBox" type="file" multiple />
-                                                </div>
-                                              </form>
-                                        </div>
-                                        </div>
-                                        <div id="editRecord">
-                                            <div style="display: block; margin-top: 10px;">
-                                                <input class="thinBorder" style="display: inline-flex; width: 50px;font-size: 15px;font-weight: bold;" id="edit_amount" type="text" value="" name="name"><input class="thinBorder" style="display: inline-flex; width: 50px; margin-left: 8px;font-size: 15px;" id="edit_currency" type="text" value="" name="name">
+                                    </div>
+                                    <div style="display: block; margin-top: 10px;">
+                                        <form action="/expense/api/upload" class="dropzone">
+                                            <div class="fallback">
+                                                <input id="new_file" name="file" class="thinTextBox" type="file" multiple />
                                             </div>
-                                            <div style="display: block; margin-top: 10px;">
-                                            <div class="row">
-                                                <section>
-                                                    <div style="float:left;margin-left:20px;">
-                                                      <label class="formTitle" style="display: block;" for="name">Title</label>
-                                                      <p class="validator">Short Title for Expense</p>
-                                                      <input class="thinBorder" style="display: block;" id="edit_title" type="text" value="Edit Sample Expense" name="name">
-                                                        
-                                                    </div>
-                                                  
-                                                    <div style="float:left; margin-left: 10px;">
-                                                      <label class="formTitle" style="display: block;" for="email">Category</label>
-                                                      <p class="validator">Pick an Expense Head</p>
-                                                      <input class="thinBorder" style="display: block;" id="edit_category" type="text" value="" list="category">
-                                                      <datalist id="category">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="editRecord">
+                                    <div class="row">
+                                        <section>
+                                            <div style="display: block; margin-top: 15px;">
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Amount</label>
+                                                    <p class="validator" id="v_new_amount">Transaction Amount</p>
+                                                    <input class="thinBorderForEdit" style="display: inline-flex; width: 75px;font-size: 15px;" id="edit_amount" type="text" value="" name="name">
+                                                </div>
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Currency</label>
+                                                    <p class="validator" id="v_new_currency">Select Currency</p>
+                                                    <input class="thinBorderForEdit" style="display: inline-flex; width: 70px; margin-left: 8px;font-size: 15px;" id="edit_currency" type="text" value="" name="name" list="currency_list">
+                                                    <datalist id="edit_currency_list">
+                                            <option value="USD">USD</option>
+                                            <option value="SGD">SGD</option>
+                                            <option value="INR">INR</option>
+                                        </datalist>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div style="display: block; margin-top: 10px;">
+                                        <div class="row">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Title</label>
+                                                    <p id="v_edit_title" class="validator">Short Title for Expense</p>
+                                                    <input class="thinBorderForEdit" style="display: block;" id="edit_title" type="text" value="Edit Sample Expense" name="name">
+
+                                                </div>
+
+                                                <div style="float:left; margin-left: 10px;">
+                                                    <label class="formTitle" style="display: block;" for="email">Category</label>
+                                                    <p class="validator">Pick an Expense Head</p>
+                                                    <input class="thinBorderForEdit" style="display: block;" id="edit_category" type="text" value="" list="category">
+                                                    <datalist id="category">
                                                         <option value="ABCD"></option>
                                                         <option value="EFGH"></option>
                                                         <option value="IJKL"></option>
                                                     </datalist>
-                                                    </div>
-                                                    <br style="clear:both;"/>
-                                                </section>
-                                            </div>
-                                            <div class="row" style="margin-top: 10px;">
-                                                <section>
-                                                    <div style="float:left;margin-left:20px;">
-                                                      <label class="formTitle" style="display: block;" for="name">Vendor</label>
-                                                      <p class="validator">Select a Vendor</p>
-                                                      <input class="thinBorder" style="display: block;" id="edit_vendor" type="text" value="" name="name">
-                                                    </div>
-                                                   
-                                                    <div style="float:left; margin-left: 10px;">
-                                                      <label class="formTitle" style="display: block;" for="email">Transaction Date</label>
-                                                      <p class="validator">Give a Transaction Date</p>
-                                                      <input class="thinBorder" style="display: block;" id="edit_date" type="date" value="" name="email">
-                                                    </div>
-                                                    <br style="clear:both;" />
-                                                </section>
-                                            </div>
-                                            <div class="row" style="margin-top: 10px;">
-                                                <section>
-                                                    <div style="float:left;margin-left:20px;">
-                                                      <label class="formTitle" style="display: block;" for="name">Remarks</label>
-                                                      <p class="validator">A Short Remark in 100 Characters Max</p>
-                                                      <textarea id="edit_remarks" class="thinTextBox" style="width: 300px;height: 80px;resize: none;"></textarea>
-                                                    </div>
-                                                    <br style="clear:both;" />
-                                                </section>
-                                            </div>                                             
-                                            </div>
-                                            <div style="display: block; margin-top: 10px;">
-                                                <form action="/expense/api/upload" class="dropzone">
-                                                    <div class="fallback">
-                                                      <input id="edit_file" name="file" class="thinTextBox" type="file" multiple />
-                                                    </div>
-                                                  </form>
-                                            </div>
-                                            </div>
+                                                </div>
+                                                <br style="clear:both;" />
+                                            </section>
+                                        </div>
+                                        <div class="row" style="margin-top: 10px;">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Vendor</label>
+                                                    <p class="validator">Select a Vendor</p>
+                                                    <input class="thinBorderForEdit" style="display: block;" id="edit_vendor" type="text" value="" name="name">
+                                                </div>
 
+                                                <div style="float:left; margin-left: 10px;">
+                                                    <label class="formTitle" style="display: block;" for="email">Transaction Date</label>
+                                                    <p class="validator">Give a Transaction Date</p>
+                                                    <input class="thinBorderForEdit" style="display: block;" id="edit_date" type="date" value="" name="email">
+                                                </div>
+                                                <br style="clear:both;" />
+                                            </section>
+                                        </div>
+                                        <div class="row" style="margin-top: 10px;">
+                                            <section>
+                                                <div style="float:left;margin-left:20px;">
+                                                    <label class="formTitle" style="display: block;" for="name">Remarks</label>
+                                                    <p class="validator">A Short Remark in 100 Characters Max</p>
+                                                    <textarea id="edit_remarks" class="thinTextBoxForEdit" style="width: 300px;height: 80px;resize: none;"></textarea>
+                                                </div>
+                                                <br style="clear:both;" />
+                                            </section>
+                                        </div>
                                     </div>
-                                  </div>
-                            
-                            </div> <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+                                    <div style="display: block; margin-top: 10px;">
+                                        <form action="/expense/api/upload" class="dropzone">
+                                            <div class="fallback">
+                                                <input id="edit_file" name="file" class="thinTextBox" type="file" multiple />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
-                        
- <!-- end row -->
+                            </div>
                         </div>
-                        <!-- end page-title -->
 
-                        
                     </div>
-                    <!-- container-fluid -->
+                    <!-- end row data-toggle="modal" data-target="#confirmModal" -->
 
+
+                    <!-- end row -->
                 </div>
-                <!-- content -->
-
+                <!-- end page-title -->
 
 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
+            <!-- container-fluid -->
 
-        <!-- END wrapper -->
+        </div>
+        <!-- content -->
 
 
-        
-    {% endblock %}
-    {% include "/jsassets.html" %}
-    {% include "/datatableassets-js.html" %}
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+    <!-- END wrapper -->
+
+
+
+    {% endblock %} {% include "/jsassets.html" %} {% include "/datatableassets-js.html" %}
 
     <script>
-
         var global_state = 0;
-        var recordID = 0; 
+        var recordID = 0;
         (function() {
-        
+
 
 
         })();
 
-        function updateUI(data){
+        function updateUI(data) {
 
-            
+
             document.getElementById("edit_title").value = data['title'];
             document.getElementById("edit_category").value = data['category'];
             document.getElementById("edit_vendor").value = data['vendorName'];
@@ -308,11 +359,11 @@
             document.getElementById("edit_amount").value = data['amount'];
             document.getElementById('edit_currency').value = data['currency'];
             document.getElementById('viewButton').click();
-        
+
         }
 
-        function getRecordDataFromAPI(id){
-            $.get("/expense/api/getByID/"+id, function(data, status){
+        function getRecordDataFromAPI(id) {
+            $.get("/expense/api/getByID/" + id, function(data, status) {
                 console.log(data);
                 updateUI(data);
 
@@ -321,48 +372,33 @@
         }
 
 
-        function loadEditViewDefault(data){
-
+        function loadEditViewDefault(data) {
             d = data.data.reverse();
-
-
-            var id = d[0][1];
+            var id = d[0]['id'];
             console.log("First Id is", id);
-            
             getRecordDataFromAPI(id);
-
-            
-
         };
 
-        function loadEditViewByID(id){
-
+        function loadEditViewByID(id) {
             getRecordDataFromAPI(id);
-
         };
 
-        function changeState(state){
-
+        function changeState(state) {
             editRecord = document.getElementById("editRecord");
             newRecord = document.getElementById("newRecord");
-
-            console.log("state is ",state);
-
-            if(state=="new"){
+            console.log("state is ", state);
+            if (state == "new") {
                 newRecord.style.display = "block";
                 editRecord.style.display = "none";
-                $(".thinBorder").attr("readonly", false); 
+                $(".thinBorder").attr("readonly", false);
                 $(".thinTextBox").attr("readonly", false);
                 $('#saveBtn').show();
-                $('.thinBorder').change(function(){
-                    console.log("Hi");
-                });
                 global_state = 0;
                 $("#saveBtn").removeClass("btn btn-success").addClass("btn btn-light");
-                
+
 
             }
-            if(state=="view"){
+            if (state == "view") {
                 newRecord.style.display = "none";
                 editRecord.style.display = "block";
                 $(".thinBorder").prop("readonly", true);
@@ -370,111 +406,181 @@
                 document.getElementById('new_date').value = getDateinFormat('today');
                 $('#saveBtn').hide();
                 global_state = 1;
-                
 
             }
-            if(state=="edit"){
+            if (state == "edit") {
                 newRecord.style.display = "none";
                 editRecord.style.display = "block";
-                $(".thinBorder").attr("readonly", false); 
+                $(".thinBorder").attr("readonly", false);
                 $(".thinTextBox").attr("readonly", false);
                 $('#saveBtn').show();
                 global_state = 0;
-                $("#saveBtn").removeClass("btn btn-success").addClass("btn btn-light");  
+                $("#saveBtn").removeClass("btn btn-success").addClass("btn btn-light");
 
             }
 
         };
-
-
     </script>
-    
+
     <script>
-     
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        /*let current_datetime = new Date();
-        var month = current_datetime.getMonth() + 1;
-        var monthString = "";
-        if(month<10){
-            monthString = '0' + month.toString();
-        }else{
-            monthString = month.toString();
-        }
-        var dayString = '0';
-        var day = current_datetime.getDate();
-        console.log(day,"day");
-        if(day<10){
-            dayString = '0' + day.toString();
-        }else{
-            dayString = day.toString();
-            console.log(dayString,"daystring");
-        }
-        var todateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + dayString;
-        var fromDateString = current_datetime.getFullYear().toString() + '-' + monthString + '-' + '01';
-        let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
-        console.log(formatted_date);
-        */
-       document.getElementById('to_date').value = getDateinFormat('today');
-       document.getElementById('from_date').value = getDateinFormat('firstday');
-       var newButton = $('#newButton');
-       var editButton = $('#editButton');
-       var viewButton = $('#viewButton');
-       viewButton.click();
-        
-        $(".thinBorder").on("input", function(){
-        // Print entered value in a div box
-        $("#saveBtn").removeClass("btn btn-light").addClass("btn btn-success");
-        console.log("SaveBtn changed");
-        });
-        
-       
+            document.getElementById('to_date').value = getDateinFormat('today');
+            document.getElementById('from_date').value = getDateinFormat('firstday');
+            var newButton = $('#newButton');
+            var editButton = $('#editButton');
+            var viewButton = $('#viewButton');
+            viewButton.click();
+            // title for New
+            var new_title = document.getElementById("new_title");
+            var new_titleValidator = document.getElementById("v_new_title");
+            titleValidator = new textInputFieldElement(new_title, new_titleValidator, 'text');
+            // title for Edit
+            var edit_title = document.getElementById("edit_title");
+            var edit_titleValidator = document.getElementById("v_edit_title");
+            editTitleValidator = new textInputFieldElement(edit_title, edit_titleValidator, 'text');
 
 
+            var category_input = document.getElementById("new_category");
+            var dataListCategory = document.getElementById("category");
+            var categoryValidator = document.getElementById("v_new_category");
+            categoryValidator = new dataListInputElement(category_input, dataListCategory, categoryValidator)
 
-        $.get("/expense/api/getAllExpenses", function(data, status){
-            console.log(data);
-            changeState('edit');
-            loadEditViewDefault(data);
-            
-            var k = data.data;
-            var l = k.reverse();
+            var vendor_input = document.getElementById("new_vendor");
+            var vendorList = document.getElementById("vendors");
+            var vendorValidator = document.getElementById("v_new_vendor");
+            vendorValidator = new dataListInputElement(vendor_input, vendorList, vendorValidator)
 
-            $('#datatable').DataTable({
-                paging:false,
-                searching:true,
-                scrollY:350,
-                data: l,
-                mark:true,
-                //scroller: {
-                //rowHeight: 10
-                //},
-                scrollCollapse:false,
-                fixedColumns:{
-                    heightMatch:'none'
+            var dateInput = document.getElementById("new_date");
+            var dateValidator = document.getElementById("v_new_date");
+            var inputDateValidator = new dateInputElement(dateInput, dateValidator);
+
+            //v_new_remarks, new_remarks
+
+            var new_remarks = document.getElementById("new_remarks");
+            var new_remarksClue = document.getElementById("v_new_remarks");
+            remarksValidator = new textInputFieldElement(new_remarks, new_remarksClue, 'text');
+
+            //NumberValidator
+            var new_amount = document.getElementById("new_amount");
+            var v_new_amount = document.getElementById("v_new_amount");
+            amountValidator = new NumberValidator(new_amount, v_new_amount);
+
+            // Currency
+            var currency_input = document.getElementById("new_currency");
+            var dataListCurrency = document.getElementById("currency_list");
+            var currencyValidator = document.getElementById("v_new_currency");
+            currencyValidator = new dataListInputElement(currency_input, dataListCurrency, currencyValidator)
+
+
+            function detectEvent(eventName) {
+                console.log("Event Detected");
+                var t_success = titleValidator.validateText(10, 40);
+                var c_success = categoryValidator.validateInput();
+                var v_success = vendorValidator.validateInput();
+                var date_success = inputDateValidator.validateInput();
+                var remarks_success = remarksValidator.validateText(30, 100);
+                var amount_success = amountValidator.validateNumber();
+                var currency_success = currencyValidator.validateInput();
+                console.log(t_success, "- title", c_success, "- category", v_success, "- vendor", date_success, "-date", remarks_success, "-remarks")
+                if (t_success && c_success && v_success && date_success && remarks_success && amount_success && currency_success) {
+                    console.log("ALL TRUE BOSS");
+                    var saveBtn = document.getElementById('saveBtn');
+                    saveBtn.className = "";
+                    var saveBtnCurrentClass = saveBtn.className;
+                    $("#saveBtn").removeClass(saveBtnCurrentClass).addClass("btn btn-success waves-effect waves-light");
+                } else {
+                    $("#saveBtn").removeClass("btn btn-light").addClass("btn btn-info waves-effect waves-light");
                 }
+            }
+
+            function detectEditEvent(eventName) {
+                console.log("Event Detected");
+                var t_success = editTitleValidator.validateText(10, 40);
+                var c_success = categoryValidator.validateInput();
+                var v_success = vendorValidator.validateInput();
+                var date_success = inputDateValidator.validateInput();
+                var remarks_success = remarksValidator.validateText(30, 100);
+                var amount_success = amountValidator.validateNumber();
+                var currency_success = currencyValidator.validateInput();
+                console.log(t_success, "- title", c_success, "- category", v_success, "- vendor", date_success, "-date", remarks_success, "-remarks")
+                if (t_success && c_success && v_success && date_success && remarks_success && amount_success && currency_success) {
+                    console.log("ALL TRUE BOSS");
+                    var saveBtn = document.getElementById('saveBtn');
+                    saveBtn.className = "";
+                    var saveBtnCurrentClass = saveBtn.className;
+                    $("#saveBtn").removeClass(saveBtnCurrentClass).addClass("btn btn-success waves-effect waves-light");
+                } else {
+                    $("#saveBtn").removeClass("btn btn-light").addClass("btn btn-info waves-effect waves-light");
+                }
+            }
+
+
+            $(".thinBorder").on("input", function() {
+                detectEvent('change');
+            });
+            //thinTextBox
+            $(".thinTextBox").on("input", function() {
+                detectEvent('change');
+            });
+
+            $(".thinBorderForEdit").on("input", function() {
+                detectEditEvent('change');
+            });
+
+
+
+
+            $.get("/expense/api/newAllExpenses", function(data, status) {
+                console.log(data);
+                changeState('edit');
+                loadEditViewDefault(data);
+
+                var k = data.data;
+                var l = k.reverse();
+
+                $('#datatable').DataTable({
+                    columns: [{
+                        "data": "id"
+                    }, {
+                        "data": "title"
+                    }, {
+                        "data": "display_amount"
+                    }, {
+                        "data": "date"
+                    }],
+                    paging: false,
+                    searching: true,
+                    scrollY: 400,
+                    data: l,
+                    mark: true,
+                    scrollCollapse: false,
+                    fixedColumns: {
+                        heightMatch: 'none'
+                    },
+                    columnDefs: [{
+                        width: 10,
+                        targets: 0
+                    }],
                 });
 
             });
 
-                    
 
-        } );
-        $("#createEmployee").click(function(){
-                    $(location).attr('href', '/configure/employee/create')
-                });
 
-                $('#datatable').on('click', 'tbody tr', function() {
-                    var table = $('#datatable').DataTable();
-                    console.log('API row values : ', table.row(this).data());
-                    var dataitem = table.row(this).data();
-                    //console.log(dataitem[1],"is the item ID");
-                    //var url = '/configure/employee/edit/'+dataitem[1]+'/'
-                    //console.log(url)
-                    //$(location).attr('href', url)
-                    //dataitem[1]
-                    loadEditViewByID(dataitem[1]);
-                })
-    
+        });
+
+
+        $('#datatable').on('click', 'tbody tr', function() {
+            var table = $('#datatable').DataTable();
+            console.log('API row values : ', table.row(this).data());
+            var dataitem = table.row(this).data();
+            loadEditViewByID(dataitem['id']);
+        })
     </script>
+    <script src="/static/assets/js/expense.js"></script>
+    <script src="/static/assets/js/toast.min.js"></script>
+    <script>
+    </script>
+
 </html>

@@ -1,13 +1,11 @@
-Expense Module
-- Search from Top Bar
-- Default Date as Today
-- Data update on Edit
-- Validation on New
-- Validation on Edit
-- Transaction Logs
-- Server Side response as flash/Toast
-- Datatable Column Customization
+Save & Copy button Display state configuration
+Add realistic Data to Expenses
+State switch should be perfect
+API for other Categories and Field Change
+Dashboard should show two or more charts using any charting Library
+Full end to end rundown for Expenses
+Wrap up of Expense Module
+sensible Data Display in Table
 
-Done
-- New and Edit Switch States in Pure JS
-- New Forms and Edit Forms needs to be border color change
+
+
