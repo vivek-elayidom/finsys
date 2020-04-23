@@ -14,7 +14,7 @@ import time
 from datetime import datetime
 import os
 from app.mod_expense.models import Expense,Tag
-from app.mod_config.models import Vendor
+from app.mod_config.models import Vendor,ExpenseHead
 
 mod_expense = Blueprint('expense', __name__, url_prefix='/expense')
 
@@ -27,13 +27,16 @@ def landing():
 @mod_expense.route('/bills/', methods=['GET', 'POST'])
 def billsAll():
     print("Got the hit")
-    return render_template("mod_expense/bill-list.html")
+    expenseHeads = db.session.query(ExpenseHead).all()
+    vendors = db.session.query(Vendor).all()
+    return render_template("mod_expense/bill-list.html",categories=expenseHeads,vendors=vendors)
 
 
 @mod_expense.route('/api/createExpense', methods=['POST'])
 def api_createExpenseEntry():
     print("Got hit for expense head create api")
     request_json = request.json
+    print(request)
 #    def __init__(self, title, meta,amount,headID,toEntityType,entityID,currency,t_date,r_date,status):
     title = request_json['title']
     meta = request_json['meta']
@@ -54,6 +57,7 @@ def api_createExpenseEntry():
 @mod_expense.route('/api/editExpense', methods=['POST'])
 def api_editExpense():
     exp = db.session.query(Expense).get(request.json['id'])
+    print(request.json)
     exp.title = request.json['title']
     exp.meta = request.json['meta']
     exp.amount = request.json['amount']
@@ -144,11 +148,14 @@ def api_expenseByID(id):
     meta = expense.meta
     amount = expense.amount
     headID = expense.headID
+    headName = ExpenseHead.query.get(headID).name
     vendorID = expense.entityID
     currency = expense.currency
-    t_date = expense.transaction_date
+    id = id
+    #str(item.transaction_date.date())
+    t_date = str(expense.transaction_date.date())
     status = expense.status
     vendor = Vendor.query.get(vendorID)
     vendorName = vendor.name
-    resp = jsonify(success=True,title=title,remarks=meta, amount=amount,category=headID,vendorID=vendorID,vendorName=vendorName, currency=currency,t_date=t_date,status=status)
+    resp = jsonify(success=True,title=title,id= id,category_name = headName, remarks=meta, amount=amount,category=headID,vendorID=vendorID,vendorName=vendorName, currency=currency,t_date=t_date,status=status)
     return resp

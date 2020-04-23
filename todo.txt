@@ -1,11 +1,26 @@
-Save & Copy button Display state configuration
-Add realistic Data to Expenses
-State switch should be perfect
-API for other Categories and Field Change
-Dashboard should show two or more charts using any charting Library
-Full end to end rundown for Expenses
-Wrap up of Expense Module
-sensible Data Display in Table
+File Uploads 2 Hours
+    Handle File Upload to S3
+    Handle File Upload to Local
+Bring in Email From Flask - This can be postponed
+
+Dashboard Template Finalization - 1 Hour
+API Design - 1 Hour
+UI Front End - ChartJS - 2 Hours
+
+Finish End to End UAT Testing - End of the day
+
+Define Dashboard Layout
+
+- Expenses
+- Income
+- Project Costs
+- Employee Payout
+- Exchange Rates
+
+Export PDF/ Send Via Email
+
+
+
 
 
 
