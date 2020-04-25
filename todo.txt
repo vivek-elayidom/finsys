@@ -7,8 +7,6 @@ Dashboard Template Finalization - 1 Hour
 API Design - 1 Hour
 UI Front End - ChartJS - 2 Hours
 
-Finish End to End UAT Testing - End of the day
-
 Define Dashboard Layout
 
 - Expenses
@@ -18,7 +16,11 @@ Define Dashboard Layout
 - Exchange Rates
 
 Export PDF/ Send Via Email
-
+============================
+Quote Module
+- Effort Estimate
+- Create From Estimate
+- Adhoc Quotes
 
 
 

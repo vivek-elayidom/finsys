@@ -63,6 +63,7 @@ from app.mod_product.controllers import mod_product as product_module
 from app.mod_project.controllers import mod_project as project_module
 from app.mod_config.controllers import mod_config as config_module
 from app.mod_expense.controllers import mod_expense as expense_module
+from app.mod_dashboard.controllers import mod_dashboard as dashboard_module
 
 # Register blueprint(s)
 app.register_blueprint(test_module)
@@ -73,6 +74,8 @@ app.register_blueprint(product_module)
 app.register_blueprint(project_module)
 app.register_blueprint(config_module)
 app.register_blueprint(expense_module)
+app.register_blueprint(dashboard_module)
+
 # app.register_blueprint(xyz_module)
 # ..
 

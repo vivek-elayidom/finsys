@@ -1,0 +1,39 @@
+Tasks
+=====
+1. Embed Creator Function as External File - Done
+2. tableConstructor Element in External File - Done
+3. Create table with Simple Number of Columns - Done
+4. Add observables to cell - No
+5. Add Observables to the Database Backend - No
+6. Integrate TogetherJS - No
+
+
+
+
+
+
+InherentFunctions
+=================
+createTable
+numRows
+numColumns
+generateID
+addRows
+addColumns
+selectTablebyID
+cellProperties
+    InputElementwithBorders
+    BorderProperties
+    EditableOnClick
+    saveChangeAPI
+cellSelector
+cellValue
+cellFormatType
+cellOnSelectionBackgroundColor
+cellOnHoverBackgroundColor
+cellEditable
+
+==== Notes ===
+Virtual Dom Approach on JavaScript
+
+https://dev.to/carlmungazi/learning-javascript-by-building-a-ui-framework-from-scratch-1767

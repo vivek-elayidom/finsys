@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spreadsheet</title>
+</head>
+
+<body>
+    <div style="position: absolute;margin-left: 20px;margin-top: 100px;">
+        <button onclick="addRowClick()">Add Row</button>
+        <button onclick="addSection()">Add Section</button>
+    </div>
+    <div id="tableContainer" style="width: 80%;margin-left: 10%;margin-right: 10%; text-align: center;">
+    </div>
+
+</body>
+<script src="/static/assets/js/spreadsheet.js"></script>
+<script>
+    var columnWidthOptions = [50, 120, 250, 50, 50, 50, 50, 50];
+    //var headers = ["ID", "Module", "Feature", "Web", "Mobile", "Integration", "action"];
+    var newTable = createTable('table1', 2, 8, columnWidthOptions);
+    var tableContainer = document.getElementById('tableContainer');
+    tableContainer.appendChild(newTable);
+
+    function addSection() {
+        var sectionTitleDiv = document.createElement('div');
+        var titlelabel = document.createElement('label');
+        titlelabel.innerHTML = "New Section";
+        sectionTitleDiv.appendChild(titlelabel);
+        var newTable2 = createTable('table1', 2, 8, columnWidthOptions);
+        tableContainer.appendChild(sectionTitleDiv);
+        tableContainer.appendChild(newTable2);
+    }
+
+
+    function addRowClick() {
+        addRow(columnWidthOptions.length, columnWidthOptions);
+    }
+</script>
+
+</html>

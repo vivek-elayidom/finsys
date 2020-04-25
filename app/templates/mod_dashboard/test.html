@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "/assets.html" %} {% block body %}
+<link rel="stylesheet" href="/static/assets/css/Chart.min.css">
+<script src="/static/assets/js/waves.min.js"></script>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    {% include "/topnav.html" %}
+    <!-- Top Bar End -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    {% include "/sidebar.html" %}
+    <!-- Left Sidebar End -->
+    <style>
+
+    </style>
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="page-title-box">
+
+
+                    <!-- end row data-toggle="modal" data-target="#confirmModal" -->
+                    <div class="row" id="navrow" style="position: -webkit-sticky !important;position: sticky !important; top: 0 !important;">
+                        <div class="col-sm-4">
+                            <h4 class="mt-0 header-title">Company in Snapshot</h4>
+                            <p class="sub-title">Select Sections to View</p>
+                        </div>
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-light active">
+                                    <input type="radio" name="options" id="today" checked=""> Today
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="options" id="week"> This Week
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="options" id="month"> This Month
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="options" id="quarter"> This Quarter
+                                </label>
+                                <label class="btn btn-light">
+                                    <input type="radio" name="options" id="year"> This Year
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="contentArea" style="padding-right: 15px;">
+                        <div class="col-sm-2" id="sidenav" style="height: 800px; background-color: white; display: block;position: sticky;">
+                            <button id="expenses" style="margin-top: 30px;" type="button" class="sidebutton btn btn-secondary waves-effect">Expenses</button>
+                            <button id="sales" style="margin-top: 15px;" type="button" class="sidebutton btn btn-outline-secondary waves-effect">Sales</button>
+                            <button id="project_costs" style="margin-top: 15px;" type="button" class="sidebutton btn btn-outline-secondary waves-effect">Project Costs</button>
+                            <button id="debts" style="margin-top: 15px;" type="button" class="sidebutton btn btn-outline-secondary waves-effect">Debts</button>
+                            <button id="salaries" style="margin-top: 15px;" type="button" class="sidebutton btn btn-outline-secondary waves-effect">Salaries</button>
+                        </div>
+                        <div class="col-sm-10" id="stage" style=" max-height: 600px; background-color: white;overflow-y: auto; border: 2px; border-color: black;">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5" style="background-color: white;max-height: 220px;overflow-y: scroll;width: 100%;">
+                                    <table class="table table-hover mb-0" style="font-size: 80%;line-height: 80%;">
+                                        <thead style="position: sticky;">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Category</th>
+                                                <th>Amount in INR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Salary</td>
+                                                <td>35000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Sales Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>SAAS Expenses</td>
+                                                <td>25000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="col-sm-7" style="background-color: white;">
+                                    <canvas id="categoryPie"></canvas>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2" style="background-color: white;height: 300px;width: 100%;">
+                                </div>
+                                <div class="col-sm-10" style="background-color: white;height: 300px;width: 100%;">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <!-- end row -->
+                </div>
+                <!-- end page-title -->
+
+
+            </div>
+            <!-- container-fluid -->
+
+        </div>
+        <!-- content -->
+
+
+
+    </div>
+
+    {% endblock %} {% include "/jsassets.html" %}
+    <script>
+        $(document).ready(function() {
+
+            $('.sidebutton').click(function() {
+                var parentNode = this.parentNode;
+                var childNodes = parentNode.childNodes;
+                for (i = 0; i < (childNodes.length - 1); i++) {
+                    if (childNodes[i] == this) {
+                        childNodes[i].className = "sidebutton btn btn-secondary waves-effect";
+                    } else {
+                        childNodes[i].className = "sidebutton btn btn-outline-secondary waves-effect";
+                    }
+                }
+
+
+            });
+
+
+        });
+    </script>
+    <script src="/static/assets/js/Chart.min.js"></script>
+    <script src="/static/assets/js/dash.js"></script>
+
+</html>
