@@ -1,11 +1,12 @@
 Tasks
 =====
-1. Embed Creator Function as External File - Done
-2. tableConstructor Element in External File - Done
-3. Create table with Simple Number of Columns - Done
-4. Add observables to cell - No
-5. Add Observables to the Database Backend - No
-6. Integrate TogetherJS - No
+1. Posting Table Data to the backend
+2. Using Table Data to create Collection in MongoDB
+3. Get response from MongoDB
+4. Reflect back to ui
+5. Save the collectionID to Database 
+6. Test MongoDB for the specific ID
+ 
 
 
 

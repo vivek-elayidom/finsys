@@ -4,39 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <title>Spreadsheet</title>
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-    <div style="position: absolute;margin-left: 20px;margin-top: 100px;">
-        <button onclick="addRowClick()">Add Row</button>
-        <button onclick="addSection()">Add Section</button>
+    <div class="row" style="margin-top:2%;padding-left: 2%;">
+        <div class="col-md-6" style="text-align: left;">
+            <button type="button" class="btn btn-primary" style="font-size: 90%; " onclick="addSection() ">Add Section</button>
+            <label>{{mongotest}}</label>
+        </div>
+        <div class="col-md-6" style="text-align:right;  padding-right: 12%;">
+            <button type="button" class="btn btn-success" style="font-size: 90%; " onclick="save() ">Save Estimate</button>
+        </div>
     </div>
-    <div id="tableContainer" style="width: 80%;margin-left: 10%;margin-right: 10%; text-align: center;">
+    <div id="sectionContainers">
+
+
     </div>
 
 </body>
-<script src="/static/assets/js/spreadsheet.js"></script>
+<script src="/static/assets/js/spreadsheet.js "></script>
 <script>
-    var columnWidthOptions = [50, 120, 250, 50, 50, 50, 50, 50];
-    //var headers = ["ID", "Module", "Feature", "Web", "Mobile", "Integration", "action"];
-    var newTable = createTable('table1', 2, 8, columnWidthOptions);
-    var tableContainer = document.getElementById('tableContainer');
-    tableContainer.appendChild(newTable);
+    var global_sectionCount = 0;
+    var columnWidthOptions = [50, 120, 250, 75, 75, 75, 75, 75];
 
     function addSection() {
+        global_sectionCount = global_sectionCount + 1;
         var sectionTitleDiv = document.createElement('div');
+        sectionTitleDiv.className = "row";
+        sectionTitleDiv.setAttribute("style", "margin-top: 5%;padding-left: 2%;");
+        var addRowDiv = document.createElement('div');
+        addRowDiv.className = "col-md-1";
+        var addRowButton = document.createElement('button');
+        addRowButton.setAttribute("onclick", "addRowClick(this)");
+        addRowButton.textContent = "Add Row";
+        addRowButton.setAttribute("style", "font-size:70%");
+        addRowButton.className = "btn btn-primary";
+        var tableContainerDiv = document.createElement('div');
+        tableContainerDiv.className = "col-md-8";
+        addRowDiv.appendChild(addRowButton);
+
+
         var titlelabel = document.createElement('label');
-        titlelabel.innerHTML = "New Section";
-        sectionTitleDiv.appendChild(titlelabel);
-        var newTable2 = createTable('table1', 2, 8, columnWidthOptions);
-        tableContainer.appendChild(sectionTitleDiv);
-        tableContainer.appendChild(newTable2);
+        titlelabel.innerHTML = "New Section ";
+        tableContainerDiv.appendChild(titlelabel);
+        var tableName = 'table' + global_sectionCount.toString();
+        var newTable2 = createTable(tableName, 2, 8, columnWidthOptions);
+        tableContainerDiv.appendChild(newTable2);
+        sectionTitleDiv.appendChild(addRowDiv);
+        sectionTitleDiv.appendChild(tableContainerDiv);
+        var sectionContainer = document.getElementById('sectionContainers');
+        sectionContainer.appendChild(sectionTitleDiv);
     }
 
+    $('.cell').click(function() {
 
-    function addRowClick() {
-        addRow(columnWidthOptions.length, columnWidthOptions);
+        console.log(this);
+
+    });
+
+
+
+    function addRowClick(t) {
+        //console.log(t.parentNode.nextSibling);
+        var div = t.parentNode;
+        var table = div.parentNode.getElementsByTagName("table")[0];
+        console.log(table, "is the tablename");
+        var tableID = table.id;
+        addRow(columnWidthOptions.length, columnWidthOptions, tableID);
     }
+
+    function onclickListen(t) {
+        console.log("on clicklistened ", t.getAttribute("column"), "-column ", t.getAttribute("row"), "-row ");
+        getCurrentTables();
+    }
+
+    function onkeyupListen(t) {
+        console.log("on keyupListen ", t.getAttribute("column"), "-column ", t.getAttribute("row"), "-row ");
+    }
+
+    function save() {
+        var htmlContent = getCurrentTables();
+        var url = '/test/tablePost';
+        var current_url = window.location.href;
+        var urlparts = current_url.split('/');
+        var docID = urlparts[5];
+
+        $.ajax({
+                data: JSON.stringify({
+                    "name": "Estimate123",
+                    "html": htmlContent,
+                    "mongoID": docID,
+                }),
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                url: url
+            })
+            .done(function(data) {
+                if (data.error) {
+                    console.log(data.error)
+                } else {
+                    console.log("excellent");
+                    console.log(data.id);
+                    window.location.replace("/test/spreadsheet/" + data.id);
+
+                };
+            });
+    }
+
+    $(document).ready(function() {
+        var current_url = window.location.href;
+        var urlparts = current_url.split('/');
+        var docID = urlparts[5];
+        console.log(docID, "Doc ID");
+        $.get("/test/api/estimate/" + docID, function(data, status) {
+            console.log(data.html);
+            document.getElementById('sectionContainers').innerHTML = data.html;
+
+        });
+    });
 </script>
 
 </html>
