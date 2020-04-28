@@ -11,6 +11,9 @@ function createCell(rowNum, columnNum, widthOptions) {
     cell.style.borderColor = "#f0f5f5";
     cell.style.width = columnWidthOptions[columnNum].toString() + "px";
     cell.style.cursor = "pointer";
+    cell.setAttribute("row", rowNum);
+    cell.setAttribute("column", columnNum);
+    cell.setAttribute("class", "cell");
     if (rowNum == 0) {
         cell.value = headers[columnNum];
         cell.style.fontSize = '12px';
@@ -22,12 +25,13 @@ function createCell(rowNum, columnNum, widthOptions) {
 
 }
 
-function createSingleCell(index, columnWidthOptions, currentRowsNum) {
+function createSingleCell(index, columnWidthOptions, currentRowsNum, tableID) {
     //console.log("Adding a cell at index -", index, "number of presentcolumns is =", currentRowsNum);
     var cell = document.createElement('input');
     cell.style.backgroundColor = '#d1e0e0';
     cell.style.border = "0px";
-    cell.style.height = "30px";
+    cell.style.height = "25px";
+    cell.style.fontSize = '12px';
     cell.style.borderColor = "#f0f5f5";
     cell.style.width = columnWidthOptions[index].toString() + "px";
     cell.style.cursor = "pointer";
@@ -35,15 +39,54 @@ function createSingleCell(index, columnWidthOptions, currentRowsNum) {
     cell.setAttribute("onkeyup", "onkeyupListen(this)");
     cell.setAttribute("column", index);
     cell.setAttribute("row", currentRowsNum - 1);
+    cell.setAttribute("class", "cell");
+    cell.setAttribute("id", tableID + '-' + (currentRowsNum - 1).toString() + '-' + index.toString())
     if (index == 0) {
         //console.log("logging ID");
         cell.setAttribute("value", currentRowsNum - 1);
         cell.setAttribute("readOnly", "true");
-
         //console.log(cell.value);
     }
     return cell;
 }
+
+class CellObject {
+    constructor(row, column, value, tableID) {
+        this.row = row;
+        this.column = column;
+        this.value = value;
+        this.tableID = tableID;
+    }
+    getRow() {
+        return this.row;
+    }
+    getColumn() {
+        return this.column;
+    }
+    getValue() {
+        return this.value;
+    }
+    getTableID() {
+        return this.tableID;
+    }
+}
+
+class SectionObject {
+    constructor(value, sectionID) {
+        this.value = value;
+        this.section = sectionID;
+    }
+
+    getValue() {
+        return this.value;
+    }
+    getSectionID() {
+        return this.section;
+    }
+}
+
+
+
 
 function addRow(numColumns, columnWidthOptions, tableID) {
     var table = document.getElementById(tableID);
@@ -54,8 +97,9 @@ function addRow(numColumns, columnWidthOptions, tableID) {
     //k.innerHTML = createSingleCell(0, columnWidthOptions).outerHTML;
     for (i = 0; i < columnWidthOptions.length; i++) {
         var k = virtualRow.insertCell(i);
-        k.innerHTML = createSingleCell(i, columnWidthOptions, currentRowsNum).outerHTML;
-        k.classList.add('cell');
+        k.innerHTML = createSingleCell(i, columnWidthOptions, currentRowsNum, tableID).outerHTML;
+
+        //k.classList.add('cell');
         console.log(k);
     }
     //console.log(createSingleCell(0, columnWidthOptions), "is the return from Single Cell Create");
@@ -66,22 +110,27 @@ function addRow(numColumns, columnWidthOptions, tableID) {
 }
 
 
+
+
 function createTable(tableName, numRows, numColumns, columnWidthOptions) {
 
     var table = document.createElement("table");
+    var tablebody = document.createElement("tbody");
     for (i = 0; i < numRows - 1; i++) {
         var tr = document.createElement('tr');
         for (j = 0; j < numColumns; j++) {
             var td = document.createElement('td');
             var cellContent = createCell(i, j, columnWidthOptions);
+            cellContent.setAttribute("id", tableName + '-' + i.toString() + '-' + j.toString())
             td.style.padding = "0px";
             td.style.border = "0px";
 
             td.appendChild(cellContent);
             tr.appendChild(td);
         }
-        table.appendChild(tr);
+        tablebody.appendChild(tr);
     }
+    table.appendChild(tablebody);
     table.setAttribute("name", tableName);
     table.setAttribute("id", tableName);
     table.style.marginLeft = "0%";

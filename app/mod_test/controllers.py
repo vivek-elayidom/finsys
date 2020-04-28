@@ -42,19 +42,21 @@ def launchSpreadsheet():
 def api_createTablePost():
     print("Got hit for expense head create api")
     request_json = request.json
+    #print(request_json)
     returnID = ""
     mycol = db["estimates"]
     if (request_json['mongoID']):
+        print("Update starting")
         thing = mycol.find_one({'_id': ObjectId(request_json['mongoID']) })
-        mydict = { "name": request_json['name'], "html": request_json['html'] }
-    #x = mycol.insert_one(mydict)
-        mycol.replace_one(thing, mydict)
+        print(thing)
+        mydict = { "name": request_json['name'], "html": request_json['html'],"data":request_json['celldata'],"sectiondata":request_json['sectiondata'],"title":request_json['title'] }
+        mycol.replace_one({'_id': ObjectId(request_json['mongoID']) }, mydict)
+        print(thing)
         returnID = request_json['mongoID']
     else:
-        mydict = { "name": request_json['name'], "html": request_json['html'] }
+        mydict = { "name": request_json['name'], "html": request_json['html'] ,"data":request_json['celldata'],"sectiondata":request_json['sectiondata'],"title":request_json['title'] }
         x = mycol.insert_one(mydict)
         returnID = str(x.inserted_id)
-
     resp = jsonify(success=True,id=returnID)
     return resp
 
@@ -74,5 +76,5 @@ def api_getTableDataAPI(id):
     print("Got hit on getTable Data API")
     #myquery = { "_id": id }
     thing = mycol.find_one({'_id': ObjectId(id) })
-    resp = jsonify(success=True,html=thing['html'])
+    resp = jsonify(success=True,html=thing['html'],celldata=thing['data'],sectiondata=thing['sectiondata'],title=thing['title'])
     return resp

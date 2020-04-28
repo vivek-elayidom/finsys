@@ -11,11 +11,13 @@
 
 <body>
     <div class="row" style="margin-top:2%;padding-left: 2%;">
-        <div class="col-md-6" style="text-align: left;">
+        <div class="col-md-3" style="text-align: left;">
             <button type="button" class="btn btn-primary" style="font-size: 90%; " onclick="addSection() ">Add Section</button>
-            <label>{{mongotest}}</label>
         </div>
-        <div class="col-md-6" style="text-align:right;  padding-right: 12%;">
+        <div class="col-md-6" style="text-align:center;  padding-right: 12%;">
+            <input value="EstimateTitle#2" id="estimateTitle" type="text" style="cursor: pointer; border-bottom-color: rgb(199, 199, 199) ; border-top: none;border-left: none;border-right: none; border-bottom-style:solid;border-bottom-width: 1px;font-size: 20px;outline: none;width:400px;">
+        </div>
+        <div class="col-md-3" style="text-align:right;  padding-right: 12%;">
             <button type="button" class="btn btn-success" style="font-size: 90%; " onclick="save() ">Save Estimate</button>
         </div>
     </div>
@@ -31,7 +33,9 @@
     var columnWidthOptions = [50, 120, 250, 75, 75, 75, 75, 75];
 
     function addSection() {
-        global_sectionCount = global_sectionCount + 1;
+        //console.log(document.getElementsByTagName('TABLE'));
+        table_id = document.getElementsByTagName('TABLE').length + 1;
+        //console.log("number of tables", table_id);
         var sectionTitleDiv = document.createElement('div');
         sectionTitleDiv.className = "row";
         sectionTitleDiv.setAttribute("style", "margin-top: 5%;padding-left: 2%;");
@@ -47,32 +51,44 @@
         addRowDiv.appendChild(addRowButton);
 
 
-        var titlelabel = document.createElement('label');
-        titlelabel.innerHTML = "New Section ";
+        var titlelabel = document.createElement('input');
+        titlelabel.value = "Section" + table_id.toString();
+        titlelabel.style.border = "0px";
+        titlelabel.style.borderBottomWidth = "1px";
+        titlelabel.style.borderBottomColor = "#c7c7c7";
+        titlelabel.style.borderBottomStyle = "solid";
+        titlelabel.style.width = "250px";
+        titlelabel.style.cursor = "pointer";
+        titlelabel.style.outline = "none";
+        titlelabel.setAttribute("id", "section" + table_id.toString())
+        titlelabel.setAttribute("class", "sectionTitle");
         tableContainerDiv.appendChild(titlelabel);
-        var tableName = 'table' + global_sectionCount.toString();
+        var tableName = 'table' + table_id.toString();
+        //console.log(tableName);
         var newTable2 = createTable(tableName, 2, 8, columnWidthOptions);
         tableContainerDiv.appendChild(newTable2);
         sectionTitleDiv.appendChild(addRowDiv);
         sectionTitleDiv.appendChild(tableContainerDiv);
         var sectionContainer = document.getElementById('sectionContainers');
         sectionContainer.appendChild(sectionTitleDiv);
+        //console.log(sectionTitleDiv);
     }
 
     $('.cell').click(function() {
 
         console.log(this);
 
+
     });
 
 
 
     function addRowClick(t) {
-        //console.log(t.parentNode.nextSibling);
-        var div = t.parentNode;
-        var table = div.parentNode.getElementsByTagName("table")[0];
-        console.log(table, "is the tablename");
-        var tableID = table.id;
+        //console.log(t.parentNode);
+        var div = t.parentNode.parentNode;
+        var tables = div.getElementsByTagName("table");
+        //console.log(tables, "is the tablearray");
+        var tableID = tables[0].id;
         addRow(columnWidthOptions.length, columnWidthOptions, tableID);
     }
 
@@ -85,18 +101,53 @@
         console.log("on keyupListen ", t.getAttribute("column"), "-column ", t.getAttribute("row"), "-row ");
     }
 
+
+    function arrayOfCellValues() {
+
+        var cellArray = [];
+        var cells = $('.cell');
+        for (i = 0; i < cells.length; i++) {
+            var inputEl = cells[i];
+            var inputTag = inputEl;
+            var table = inputTag.parentElement.parentElement.parentElement.parentElement;
+            //console.log(table.id);
+            var cell = new CellObject(inputTag.getAttribute("row"), inputTag.getAttribute("column"), inputTag.value, table.id);
+            cellArray.push(cell);
+        }
+        //console.log(cellArray);
+        return cellArray;
+    }
+
+    function getSectionArray() {
+        var sectionArray = [];
+        var sections = $('.sectionTitle');
+        for (i = 0; i < sections.length; i++) {
+            var id = sections[i].id;
+            var value = sections[i].value;
+            var sec = new SectionObject(value, id);
+            sectionArray.push(sec);
+        }
+        return sectionArray;
+    }
+
     function save() {
         var htmlContent = getCurrentTables();
         var url = '/test/tablePost';
         var current_url = window.location.href;
         var urlparts = current_url.split('/');
         var docID = urlparts[5];
+        var cellArray = arrayOfCellValues();
+        var secArray = getSectionArray();
+        var docTitle = document.getElementById('estimateTitle').value;
 
         $.ajax({
                 data: JSON.stringify({
                     "name": "Estimate123",
                     "html": htmlContent,
                     "mongoID": docID,
+                    "celldata": cellArray,
+                    "sectiondata": secArray,
+                    "title": docTitle,
                 }),
                 type: 'POST',
                 dataType: 'json',
@@ -108,22 +159,41 @@
                     console.log(data.error)
                 } else {
                     console.log("excellent");
-                    console.log(data.id);
+                    //console.log(data.id);
                     window.location.replace("/test/spreadsheet/" + data.id);
 
                 };
             });
     }
 
+    function updateCellData(data) {
+        console.log(data, "is all data of record");
+        for (i = 0; i < data.celldata.length; i++) {
+            //console.log(data.celldata[i], "is the celldata number", i);
+            var cell_id = data.celldata[i].tableID + '-' + data.celldata[i].row + '-' + data.celldata[i].column;
+            console.log(cell_id, "is the cell number", i);
+            document.getElementById(cell_id).value = data.celldata[i].value;
+        }
+
+        for (j = 0; j < data.sectiondata.length; j++) {
+
+            var sectionID = data.sectiondata[j].section;
+            var value = data.sectiondata[j].value;
+            document.getElementById(sectionID).value = value;
+
+        }
+        document.getElementById('estimateTitle').value = data.title;
+    }
+
     $(document).ready(function() {
         var current_url = window.location.href;
         var urlparts = current_url.split('/');
         var docID = urlparts[5];
-        console.log(docID, "Doc ID");
+        //console.log(docID, "Doc ID");
         $.get("/test/api/estimate/" + docID, function(data, status) {
-            console.log(data.html);
+            // /console.log(data);
             document.getElementById('sectionContainers').innerHTML = data.html;
-
+            updateCellData(data);
         });
     });
 </script>
